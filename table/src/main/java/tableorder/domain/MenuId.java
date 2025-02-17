@@ -13,7 +13,7 @@ import org.springframework.beans.BeanUtils;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class MenuIds {
+public class MenuId {
 
     private Long id;
 }

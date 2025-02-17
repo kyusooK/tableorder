@@ -8,6 +8,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 @FeignClient(name = "menu", url = "${api.url.menu}")
 public interface MenuService {
-    @GetMapping(path = "/menus/search/getMenu")
-    public List<Menu> getMenu();
+    @GetMapping(path = "/menus")
+    public List<Menu> getMenus(@PathVariable("ids") List<Long> ids);
 }

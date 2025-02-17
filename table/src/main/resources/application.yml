@@ -47,7 +47,8 @@ logging:
 
 api:
   url: 
-    table: localhost:8083 
+    table: localhost:8083
+    menu: localhost:8082
     
 
 server:

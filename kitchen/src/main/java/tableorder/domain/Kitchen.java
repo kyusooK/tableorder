@@ -31,7 +31,7 @@ public class Kitchen {
     private TableOrderId tableOrderId;
 
     @Embedded
-    private MenuId menuId;
+    private List<MenuId> menuId;
 
     public static KitchenRepository repository() {
         KitchenRepository kitchenRepository = KitchenApplication.applicationContext.getBean(
@@ -40,57 +40,43 @@ public class Kitchen {
         return kitchenRepository;
     }
 
-    //<<< Clean Arch / Port Method
-    public void cook(CookCommand cookCommand) {
-        //implement business logic here:
-
-        Cooked cooked = new Cooked(this);
-        cooked.publishAfterCommit();
-    }
-
-    //>>> Clean Arch / Port Method
-    //<<< Clean Arch / Port Method
-    public void serve(ServeCommand serveCommand) {
-        //implement business logic here:
-
-        Served served = new Served(this);
-        served.publishAfterCommit();
-    }
-
-    //>>> Clean Arch / Port Method
-
-    //<<< Clean Arch / Port Method
     public static void acceptOrder(OrderPlaced orderPlaced) {
-        //implement business logic here:
 
-        /** Example 1:  new item 
         Kitchen kitchen = new Kitchen();
+        kitchen.setMenuId(orderPlaced.getMenuId());
+        kitchen.setTableOrderId(new TableOrderId(orderPlaced.getId()));
+        kitchen.setFoodStatus(FoodStatus.ACCEPTED);
+        kitchen.setRequestInfo(orderPlaced.getRequestInfo());
         repository().save(kitchen);
 
         OrderAccepted orderAccepted = new OrderAccepted(kitchen);
         orderAccepted.publishAfterCommit();
-        */
-
-        /** Example 2:  finding and process
         
-        // if orderPlaced.menuId exists, use it
-        
-        // ObjectMapper mapper = new ObjectMapper();
-        // Map<Long, Object> tableOrderMap = mapper.convertValue(orderPlaced.getMenuId(), Map.class);
-
-        repository().findById(orderPlaced.get???()).ifPresent(kitchen->{
-            
-            kitchen // do something
-            repository().save(kitchen);
-
-            OrderAccepted orderAccepted = new OrderAccepted(kitchen);
-            orderAccepted.publishAfterCommit();
-
-         });
-        */
 
     }
-    //>>> Clean Arch / Port Method
+
+    public void cook(CookCommand cookCommand) {
+
+        repository().findById(this.getId()).ifPresent(kitchen ->{
+            
+            kitchen.setFoodStatus(cookCommand.getFoodStatus());
+
+            Cooked cooked = new Cooked(this);
+            cooked.publishAfterCommit();
+        });
+    }
+
+    public void serve(ServeCommand serveCommand) {
+        //implement business logic here:
+
+        repository().findById(this.getId()).ifPresent(kitchen ->{
+            
+            kitchen.setFoodStatus(serveCommand.getFoodStatus());
+
+            Served served = new Served(this);
+            served.publishAfterCommit();
+        });
+    }
+
 
 }
-//>>> DDD / Aggregate Root

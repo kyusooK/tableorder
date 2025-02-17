@@ -17,4 +17,5 @@ public class RequstPaymentCompleted extends AbstractEvent {
     private String buyerName;
     private String buyerTel;
     private String buyerEmail;
+    private String status;
 }
