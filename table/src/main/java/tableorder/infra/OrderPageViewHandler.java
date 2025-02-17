@@ -27,7 +27,7 @@ public class OrderPageViewHandler {
             // view 객체 생성
             OrderPage orderPage = new OrderPage();
             // view 객체에 이벤트의 Value 를 set 함
-            orderPage.setMenuName(orderAccepted.getMenuName());
+            orderPage.setMenuName(orderAccepted.getMenuId().toString());
             orderPage.setOrderInfo(orderAccepted.getOrderInfo());
             orderPage.setRequestInfo(orderAccepted.getRequestInfo());
             orderPage.setOrderStatus(
