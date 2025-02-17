@@ -108,11 +108,11 @@
             me.values = temp.data._embedded.kitchens;
             
             me.newValue = {
-                'tableOrderId': {},
-                'menuId': [],
                 'orderInfo': '',
                 'requestInfo': '',
                 'foodStatus': '',
+                'tableOrderId': {},
+                'menuId': {},
             }
         },
         methods:{

@@ -73,7 +73,7 @@
                     { text: "paymentId", value: "paymentId" },
                     { text: "paymentStatus", value: "paymentStatus" },
                     { text: "orderDate", value: "orderDate" },
-                    { text: "menuIds", value: "menuIds" },
+                    { text: "menuId", value: "menuId" },
                 ],
             tableOrder : [],
             newValue: {},
@@ -97,7 +97,7 @@
                 'paymentId': 0,
                 'paymentStatus': '',
                 'orderDate': '2025-02-17',
-                'menuIds': {},
+                'menuId': {},
             }
         },
         methods: {

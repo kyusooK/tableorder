@@ -5,8 +5,6 @@
         </v-card-title>
 
         <v-card-text>
-            <TableOrderId offline label="TableOrderId" v-model="item.tableOrderId" :editMode="false" :key="false" @change="change" />
-            <MenuIdManager offline label="MenuId" v-model="item.menuId" :editMode="false" @change="change" />
             <div>
                 <String label="OrderInfo" v-model="item.orderInfo" :editMode="editMode" @change="change" />
             </div>
@@ -14,6 +12,8 @@
                 <String label="RequestInfo" v-model="item.requestInfo" :editMode="editMode" @change="change" />
             </div>
             <FoodStatus offline label="FoodStatus" v-model="item.foodStatus" :editMode="false" :key="false" @change="change" />
+            <TableOrderId offline label="TableOrderId" v-model="item.tableOrderId" :editMode="false" :key="false" @change="change" />
+            <MenuId offline label="MenuId" v-model="item.menuId" :editMode="false" :key="false" @change="change" />
         </v-card-text>
 
         <v-card-actions>

@@ -11,4 +11,5 @@ public class Served extends AbstractEvent {
 
     private Long id;
     private Object foodStatus;
+    private Object tableOrderId;
 }

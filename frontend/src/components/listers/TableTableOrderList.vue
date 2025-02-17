@@ -58,7 +58,7 @@
                             [ PaymentId :  {{data.paymentId }} ] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             [ PaymentStatus :  {{data.paymentStatus }} ] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             [ OrderDate :  {{data.orderDate }} ] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            [ MenuIds :  {{data.menuIds }} ] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            [ MenuId :  {{data.menuId }} ] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         </v-list-item-subtitle>
 
                     </v-list-item-content>
@@ -132,7 +132,7 @@
                 'paymentId': 0,
                 'paymentStatus': '',
                 'orderDate': '2025-02-17',
-                'menuIds': {},
+                'menuId': {},
             }
         },
         methods: {

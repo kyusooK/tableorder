@@ -50,11 +50,11 @@
 
                         <v-list-item-subtitle style="font-size:25px; font-weight:700;">
                             [ Id :  {{data.id }} ] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            [ TableOrderId :  {{data.tableOrderId }} ] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            [ MenuId :  {{data.menuId }} ] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             [ OrderInfo :  {{data.orderInfo }} ] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             [ RequestInfo :  {{data.requestInfo }} ] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             [ FoodStatus :  {{data.foodStatus }} ] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            [ TableOrderId :  {{data.tableOrderId }} ] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            [ MenuId :  {{data.menuId }} ] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         </v-list-item-subtitle>
 
                     </v-list-item-content>
@@ -122,11 +122,11 @@
             this.values = temp.data._embedded.kitchens;
             
             this.newValue = {
-                'tableOrderId': {},
-                'menuId': [],
                 'orderInfo': '',
                 'requestInfo': '',
                 'foodStatus': '',
+                'tableOrderId': {},
+                'menuId': {},
             }
         },
         methods: {

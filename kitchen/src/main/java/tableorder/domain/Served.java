@@ -13,6 +13,7 @@ public class Served extends AbstractEvent {
 
     private Long id;
     private FoodStatus foodStatus;
+    private TableOrderId tableOrderId;
 
     public Served(Kitchen aggregate) {
         super(aggregate);
