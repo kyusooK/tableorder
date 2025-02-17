@@ -34,7 +34,7 @@ public class TableOrder  {
     private Date orderDate;
     
     @ElementCollection
-    private List<MenuIds> menuIds;
+    private List<MenuId> menuIds;
 
 
     public static TableOrderRepository repository(){
@@ -65,25 +65,15 @@ public class TableOrder  {
 //<<< Clean Arch / Port Method
     public static void updateOrderStatus(OrderAccepted orderAccepted){
         
-        //implement business logic here:
         
-        /** Example 1:  new item 
-        TableOrder tableOrder = new TableOrder();
-        repository().save(tableOrder);
-
-        */
-
-        /** Example 2:  finding and process
         
-        // if orderAccepted.tableOrderIdmenuId exists, use it
-        
-        // ObjectMapper mapper = new ObjectMapper();
-        // Map<Long, Object> kitchenMap = mapper.convertValue(orderAccepted.getTableOrderId(), Map.class);
+        ObjectMapper mapper = new ObjectMapper();
+        Map<Long, Object> kitchenMap = mapper.convertValue(orderAccepted.getTableOrderId(), Map.class);
         // Map<Long, Object> kitchenMap = mapper.convertValue(orderAccepted.getMenuId(), Map.class);
 
-        repository().findById(orderAccepted.get???()).ifPresent(tableOrder->{
+        repository().findById(Long.valueOf(kitchenMap.get("id").toString())).ifPresent(tableOrder->{
             
-            tableOrder // do something
+            tableOrder.set
             repository().save(tableOrder);
 
 
