@@ -21,7 +21,7 @@
             <div>
                 <Date label="OrderDate" v-model="item.orderDate" :editMode="editMode" @change="change" />
             </div>
-            <MenuIdsManager offline label="MenuIds" v-model="item.menuIds" :editMode="false" @change="change" />
+            <MenuIds offline label="MenuIds" v-model="item.menuIds" :editMode="false" :key="false" @change="change" />
         </v-card-text>
 
         <v-card-actions>

@@ -22,7 +22,7 @@
             <Number label="결제정보" v-model="value.paymentId" :editMode="editMode" :inputUI="''"/>
             <String label="결제 상태" v-model="value.paymentStatus" :editMode="editMode" :inputUI="''"/>
             <Date label="주문일자" v-model="value.orderDate" :editMode="editMode" :inputUI="''"/>
-            <Manager offline label="menuIds" v-model="value.menuIds" :editMode="editMode" @change="change"/>
+            <MenuIds offline label="menuIds" v-model="value.menuIds" :editMode="editMode" @change="change"/>
         </v-card-text>
 
         <v-card-actions style="background-color: white;">

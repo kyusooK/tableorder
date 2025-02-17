@@ -73,12 +73,11 @@ public class TableOrder  {
 
         repository().findById(Long.valueOf(kitchenMap.get("id").toString())).ifPresent(tableOrder->{
             
-            tableOrder.set
+            tableOrder.setOrderStatus(OrderStatus.ORDERPLACED);
             repository().save(tableOrder);
 
 
-         });
-        */
+        });
 
         
     }
@@ -86,30 +85,16 @@ public class TableOrder  {
 //<<< Clean Arch / Port Method
     public static void updateOrderStatus(Cooked cooked){
         
-        //implement business logic here:
-        
-        /** Example 1:  new item 
-        TableOrder tableOrder = new TableOrder();
-        repository().save(tableOrder);
+        ObjectMapper mapper = new ObjectMapper();
+        Map<Long, Object> kitchenMap = mapper.convertValue(cooked.getTableOrderId(), Map.class);
 
-        */
-
-        /** Example 2:  finding and process
-        
-        // if cooked.tableOrderIdmenuId exists, use it
-        
-        // ObjectMapper mapper = new ObjectMapper();
-        // Map<Long, Object> kitchenMap = mapper.convertValue(cooked.getTableOrderId(), Map.class);
-        // Map<Long, Object> kitchenMap = mapper.convertValue(cooked.getMenuId(), Map.class);
-
-        repository().findById(cooked.get???()).ifPresent(tableOrder->{
+        repository().findById(Long.valueOf(kitchenMap.get("id").toString())).ifPresent(tableOrder->{
             
-            tableOrder // do something
+            tableOrder.setOrderStatus(OrderStatus.ORDERPLACED);
             repository().save(tableOrder);
 
 
-         });
-        */
+        });
 
         
     }
