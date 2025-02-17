@@ -59,8 +59,8 @@ public class TableOrder  {
     
     
     
-    @ElementCollection
-    private List<MenuIds> menuIds;
+    @Embedded
+    private MenuIds menuIds;
 
 
     public static TableOrderRepository repository(){
@@ -82,10 +82,6 @@ public class TableOrder  {
             .getBean(tableorder.external.Service.class)
             .tableOrder(tableOrderQuery);
 
-        OrderPlaced orderPlaced = new OrderPlaced(this);
-        orderPlaced.publishAfterCommit();
-        OrderPlaced orderPlaced = new OrderPlaced(this);
-        orderPlaced.publishAfterCommit();
         OrderPlaced orderPlaced = new OrderPlaced(this);
         orderPlaced.publishAfterCommit();
     }

@@ -114,7 +114,7 @@
                 'paymentId': 0,
                 'paymentStatus': '',
                 'orderDate': '2025-02-17',
-                'menuIds': [],
+                'menuIds': {},
             }
         },
         methods:{
