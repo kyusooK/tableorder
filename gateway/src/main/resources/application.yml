@@ -1,0 +1,84 @@
+server:
+  port: 8088
+
+---
+
+spring:
+  profiles: default
+  cloud:
+    gateway:
+#<<< API Gateway / Routes
+      routes:
+        - id: menu
+          uri: http://localhost:8082
+          predicates:
+            - Path=/menus/**, /getMenus/**
+        - id: table
+          uri: http://localhost:8083
+          predicates:
+            - Path=/tableOrders/**, /orderPages/**
+        - id: salesanalysis
+          uri: http://localhost:8084
+          predicates:
+            - Path=/sales/**, /salesDataAnalyses/**
+        - id: kitchen
+          uri: http://localhost:8085
+          predicates:
+            - Path=/kitchens/**, 
+        - id: frontend
+          uri: http://localhost:8080
+          predicates:
+            - Path=/**
+#>>> API Gateway / Routes
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins:
+              - "*"
+            allowedMethods:
+              - "*"
+            allowedHeaders:
+              - "*"
+            allowCredentials: true
+
+
+---
+
+spring:
+  profiles: docker
+  cloud:
+    gateway:
+      routes:
+        - id: menu
+          uri: http://menu:8080
+          predicates:
+            - Path=/menus/**, 
+        - id: table
+          uri: http://table:8080
+          predicates:
+            - Path=/tableOrders/**, 
+        - id: salesanalysis
+          uri: http://salesanalysis:8080
+          predicates:
+            - Path=/sales/**, 
+        - id: kitchen
+          uri: http://kitchen:8080
+          predicates:
+            - Path=/kitchens/**, 
+        - id: frontend
+          uri: http://frontend:8080
+          predicates:
+            - Path=/**
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins:
+              - "*"
+            allowedMethods:
+              - "*"
+            allowedHeaders:
+              - "*"
+            allowCredentials: true
+
+server:
+  port: 8080
