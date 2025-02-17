@@ -16,48 +16,22 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 //<<< DDD / Aggregate Root
 public class TableOrder  {
-
-
-    
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    
-    
-    
-    
     private Long id;
-    
-    
-    
     
     private String requestInfo;
     
-    
-    
-    
     private Long price;
-    
-    
     
     @Enumerated(EnumType.STRING)
     private OrderStatus orderStatus;
     
-    
-    
-    
     private Long paymentId;
-    
-    
-    
     
     private String paymentStatus;
     
-    
-    
-    
     private Date orderDate;
-    
-    
     
     @ElementCollection
     private List<MenuIds> menuIds;
@@ -84,10 +58,7 @@ public class TableOrder  {
 
         OrderPlaced orderPlaced = new OrderPlaced(this);
         orderPlaced.publishAfterCommit();
-        OrderPlaced orderPlaced = new OrderPlaced(this);
-        orderPlaced.publishAfterCommit();
-        OrderPlaced orderPlaced = new OrderPlaced(this);
-        orderPlaced.publishAfterCommit();
+        
     }
 //>>> Clean Arch / Port Method
 
