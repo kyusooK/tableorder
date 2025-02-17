@@ -33,12 +33,6 @@ public class Kitchen {
     @Enumerated(EnumType.STRING)
     private FoodStatus foodStatus;
 
-    @PostPersist
-    public void onPostPersist() {
-        OrderAccepted orderAccepted = new OrderAccepted(this);
-        orderAccepted.publishAfterCommit();
-    }
-
     public static KitchenRepository repository() {
         KitchenRepository kitchenRepository = KitchenApplication.applicationContext.getBean(
             KitchenRepository.class
@@ -66,27 +60,31 @@ public class Kitchen {
     //>>> Clean Arch / Port Method
 
     //<<< Clean Arch / Port Method
-    public static void 주문접수(주문됨 주문됨) {
+    public static void acceptOrder(OrderPlaced orderPlaced) {
         //implement business logic here:
 
         /** Example 1:  new item 
         Kitchen kitchen = new Kitchen();
         repository().save(kitchen);
 
+        OrderAccepted orderAccepted = new OrderAccepted(kitchen);
+        orderAccepted.publishAfterCommit();
         */
 
         /** Example 2:  finding and process
         
-        // if 주문됨.menuId exists, use it
+        // if orderPlaced.menuId exists, use it
         
         // ObjectMapper mapper = new ObjectMapper();
-        // Map<Long, Object> tableOrderMap = mapper.convertValue(주문됨.getMenuId(), Map.class);
+        // Map<Long, Object> tableOrderMap = mapper.convertValue(orderPlaced.getMenuId(), Map.class);
 
-        repository().findById(주문됨.get???()).ifPresent(kitchen->{
+        repository().findById(orderPlaced.get???()).ifPresent(kitchen->{
             
             kitchen // do something
             repository().save(kitchen);
 
+            OrderAccepted orderAccepted = new OrderAccepted(kitchen);
+            orderAccepted.publishAfterCommit();
 
          });
         */

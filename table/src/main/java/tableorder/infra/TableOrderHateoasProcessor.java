@@ -14,8 +14,8 @@ public class TableOrderHateoasProcessor
     public EntityModel<TableOrder> process(EntityModel<TableOrder> model) {
         model.add(
             Link
-                .of(model.getRequiredLink("self").getHref() + "/주문")
-                .withRel("주문")
+                .of(model.getRequiredLink("self").getHref() + "/order")
+                .withRel("order")
         );
 
         return model;

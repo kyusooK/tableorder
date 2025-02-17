@@ -67,9 +67,9 @@
                 v-if="!editMode"
                 color="primary"
                 text
-                @click="주문"
+                @click="order"
             >
-                주문
+                Order
             </v-btn>
         </v-card-actions>
 
@@ -205,10 +205,10 @@
             change(){
                 this.$emit('input', this.value);
             },
-            async 주문() {
+            async order() {
                 try {
                     if(!this.offline){
-                        var temp = await axios.post(axios.fixUrl(this.value._links['/주문'].href))
+                        var temp = await axios.post(axios.fixUrl(this.value._links['/order'].href))
                         for(var k in temp.data) this.value[k]=temp.data[k];
                     }
 

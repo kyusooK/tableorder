@@ -71,19 +71,23 @@ public class TableOrder  {
 
 
 //<<< Clean Arch / Port Method
-    public void 주문(){
+    public void order(){
         
         //implement business logic here:
         
 
-        List<Menu> menuList = TableOrderApplication.applicationContext
-            .getBean(tableorder.external.MenuService.class)
-            .getMenu//();
+        tableorder.external.TableOrderQuery tableOrderQuery = new tableorder.external.TableOrderQuery();
+        // tableOrderQuery.set??()        
+          = TableOrderApplication.applicationContext
+            .getBean(tableorder.external.Service.class)
+            .tableOrder(tableOrderQuery);
 
-        주문됨 주문됨 = new 주문됨(this);
-        주문됨.publishAfterCommit();
-        주문됨 주문됨 = new 주문됨(this);
-        주문됨.publishAfterCommit();
+        OrderPlaced orderPlaced = new OrderPlaced(this);
+        orderPlaced.publishAfterCommit();
+        OrderPlaced orderPlaced = new OrderPlaced(this);
+        orderPlaced.publishAfterCommit();
+        OrderPlaced orderPlaced = new OrderPlaced(this);
+        orderPlaced.publishAfterCommit();
     }
 //>>> Clean Arch / Port Method
 

@@ -37,7 +37,7 @@ public class Sales {
     }
 
     //<<< Clean Arch / Port Method
-    public static void registerSalesData(주문됨 주문됨) {
+    public static void registerSalesData(OrderPlaced orderPlaced) {
         //implement business logic here:
 
         /** Example 1:  new item 
@@ -52,12 +52,12 @@ public class Sales {
 
         /** Example 2:  finding and process
         
-        // if 주문됨.menuId exists, use it
+        // if orderPlaced.menuId exists, use it
         
         // ObjectMapper mapper = new ObjectMapper();
-        // Map<Long, Object> tableOrderMap = mapper.convertValue(주문됨.getMenuId(), Map.class);
+        // Map<Long, Object> tableOrderMap = mapper.convertValue(orderPlaced.getMenuId(), Map.class);
 
-        repository().findById(주문됨.get???()).ifPresent(sales->{
+        repository().findById(orderPlaced.get???()).ifPresent(sales->{
             
             sales // do something
             repository().save(sales);

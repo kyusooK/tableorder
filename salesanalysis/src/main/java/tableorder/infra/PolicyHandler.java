@@ -25,12 +25,14 @@ public class PolicyHandler {
 
     @StreamListener(
         value = KafkaProcessor.INPUT,
-        condition = "headers['type']=='주문됨'"
+        condition = "headers['type']=='OrderPlaced'"
     )
-    public void whenever주문됨_RegisterSalesData(@Payload 주문됨 주문됨) {
-        주문됨 event = 주문됨;
+    public void wheneverOrderPlaced_RegisterSalesData(
+        @Payload OrderPlaced orderPlaced
+    ) {
+        OrderPlaced event = orderPlaced;
         System.out.println(
-            "\n\n##### listener RegisterSalesData : " + 주문됨 + "\n\n"
+            "\n\n##### listener RegisterSalesData : " + orderPlaced + "\n\n"
         );
 
         // Sample Logic //

@@ -25,14 +25,18 @@ public class PolicyHandler {
 
     @StreamListener(
         value = KafkaProcessor.INPUT,
-        condition = "headers['type']=='주문됨'"
+        condition = "headers['type']=='OrderPlaced'"
     )
-    public void whenever주문됨_주문접수(@Payload 주문됨 주문됨) {
-        주문됨 event = 주문됨;
-        System.out.println("\n\n##### listener 주문접수 : " + 주문됨 + "\n\n");
+    public void wheneverOrderPlaced_AcceptOrder(
+        @Payload OrderPlaced orderPlaced
+    ) {
+        OrderPlaced event = orderPlaced;
+        System.out.println(
+            "\n\n##### listener AcceptOrder : " + orderPlaced + "\n\n"
+        );
 
         // Sample Logic //
-        Kitchen.주문접수(event);
+        Kitchen.acceptOrder(event);
     }
 }
 //>>> Clean Arch / Inbound Adaptor

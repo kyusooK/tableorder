@@ -20,14 +20,14 @@ public class TableOrderController {
     @Autowired
     TableOrderRepository tableOrderRepository;
 
-    @RequestMapping(value = "/tableOrders/주문",
+    @RequestMapping(value = "/tableOrders/order",
             method = RequestMethod.POST,
             produces = "application/json;charset=UTF-8")
-    public TableOrder 주문(HttpServletRequest request, HttpServletResponse response, 
+    public TableOrder order(HttpServletRequest request, HttpServletResponse response, 
         ) throws Exception {
-            System.out.println("##### /tableOrder/주문  called #####");
+            System.out.println("##### /tableOrder/order  called #####");
             TableOrder tableOrder = new TableOrder();
-            tableOrder.주문();
+            tableOrder.order();
             tableOrderRepository.save(tableOrder);
             return tableOrder;
     }
