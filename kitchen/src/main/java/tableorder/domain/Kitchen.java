@@ -20,18 +20,18 @@ public class Kitchen {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Embedded
-    private TableOrderId tableOrderId;
-
-    @ElementCollection
-    private List<MenuId> menuId;
-
     private String orderInfo;
 
     private String requestInfo;
 
     @Enumerated(EnumType.STRING)
     private FoodStatus foodStatus;
+
+    @Embedded
+    private TableOrderId tableOrderId;
+
+    @Embedded
+    private MenuId menuId;
 
     public static KitchenRepository repository() {
         KitchenRepository kitchenRepository = KitchenApplication.applicationContext.getBean(

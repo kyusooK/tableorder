@@ -15,12 +15,6 @@
                             <v-list-item-title>
                             </v-list-item-title>
                             <v-list-item-subtitle>
-                                TableOrderId :  {{item.tableOrderId }}
-                            </v-list-item-subtitle>
-                            <v-list-item-subtitle>
-                                MenuId :  {{item.menuId }}
-                            </v-list-item-subtitle>
-                            <v-list-item-subtitle>
                                 OrderInfo :  {{item.orderInfo }}
                             </v-list-item-subtitle>
                             <v-list-item-subtitle>
@@ -28,6 +22,12 @@
                             </v-list-item-subtitle>
                             <v-list-item-subtitle>
                                 FoodStatus :  {{item.foodStatus }}
+                            </v-list-item-subtitle>
+                            <v-list-item-subtitle>
+                                TableOrderId :  {{item.tableOrderId }}
+                            </v-list-item-subtitle>
+                            <v-list-item-subtitle>
+                                MenuId :  {{item.menuId }}
                             </v-list-item-subtitle>
                         </v-list-item-content>
 

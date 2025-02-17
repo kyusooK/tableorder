@@ -67,11 +67,11 @@
             headers: 
                 [
                     { text: "id", value: "id" },
-                    { text: "tableOrderId", value: "tableOrderId" },
-                    { text: "menuId", value: "menuId" },
                     { text: "orderInfo", value: "orderInfo" },
                     { text: "requestInfo", value: "requestInfo" },
                     { text: "foodStatus", value: "foodStatus" },
+                    { text: "tableOrderId", value: "tableOrderId" },
+                    { text: "menuId", value: "menuId" },
                 ],
             kitchen : [],
             newValue: {},
@@ -89,11 +89,11 @@
             this.values = temp.data._embedded.kitchens;
 
             this.newValue = {
-                'tableOrderId': {},
-                'menuId': [],
                 'orderInfo': '',
                 'requestInfo': '',
                 'foodStatus': '',
+                'tableOrderId': {},
+                'menuId': {},
             }
         },
         methods: {

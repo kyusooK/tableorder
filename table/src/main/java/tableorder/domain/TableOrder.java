@@ -1,97 +1,62 @@
 package tableorder.domain;
 
-import tableorder.TableApplication;
-import javax.persistence.*;
-import java.util.List;
-import lombok.Data;
-import java.util.Date;
-import java.time.LocalDate;
-import java.util.Map;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
+import java.time.LocalDate;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+import javax.persistence.*;
+import lombok.Data;
+import tableorder.TableApplication;
+import tableorder.domain.OrderPlaced;
 
 @Entity
-@Table(name="TableOrder_table")
+@Table(name = "TableOrder_table")
 @Data
-
 //<<< DDD / Aggregate Root
-public class TableOrder  {
+public class TableOrder {
 
-
-    
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    
-    
-    
-    
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    
-    
-    
-    
+
     private String requestInfo;
-    
-    
-    
-    
+
     private Long price;
-    
-    
-    
+
     @Enumerated(EnumType.STRING)
     private OrderStatus orderStatus;
-    
-    
-    
-    
+
     private Long paymentId;
-    
-    
-    
-    
+
     private String paymentStatus;
-    
-    
-    
-    
+
     private Date orderDate;
-    
-    
-    
+
     @Embedded
-    private MenuIds menuIds;
+    private MenuId menuId;
 
-
-    public static TableOrderRepository repository(){
-        TableOrderRepository tableOrderRepository = TableApplication.applicationContext.getBean(TableOrderRepository.class);
-        return tableOrderRepository;
-    }
-
-
-
-//<<< Clean Arch / Port Method
-    public void order(){
-        
-        //implement business logic here:
-        
-
-        tableorder.external.TableOrderQuery tableOrderQuery = new tableorder.external.TableOrderQuery();
-        // tableOrderQuery.set??()        
-          = TableOrderApplication.applicationContext
-            .getBean(tableorder.external.Service.class)
-            .tableOrder(tableOrderQuery);
-
+    @PostPersist
+    public void onPostPersist() {
         OrderPlaced orderPlaced = new OrderPlaced(this);
         orderPlaced.publishAfterCommit();
     }
-//>>> Clean Arch / Port Method
 
-//<<< Clean Arch / Port Method
-    public static void updateOrderStatus(OrderAccepted orderAccepted){
-        
+    public static TableOrderRepository repository() {
+        TableOrderRepository tableOrderRepository = TableApplication.applicationContext.getBean(
+            TableOrderRepository.class
+        );
+        return tableOrderRepository;
+    }
+
+    public void order() {
+        //
+    }
+
+    //<<< Clean Arch / Port Method
+    public static void updateOrderStatus(OrderAccepted orderAccepted) {
         //implement business logic here:
-        
+
         /** Example 1:  new item 
         TableOrder tableOrder = new TableOrder();
         repository().save(tableOrder);
@@ -115,14 +80,13 @@ public class TableOrder  {
          });
         */
 
-        
     }
-//>>> Clean Arch / Port Method
-//<<< Clean Arch / Port Method
-    public static void updateOrderStatus(Cooked cooked){
-        
+
+    //>>> Clean Arch / Port Method
+    //<<< Clean Arch / Port Method
+    public static void updateOrderStatus(Cooked cooked) {
         //implement business logic here:
-        
+
         /** Example 1:  new item 
         TableOrder tableOrder = new TableOrder();
         repository().save(tableOrder);
@@ -146,14 +110,13 @@ public class TableOrder  {
          });
         */
 
-        
     }
-//>>> Clean Arch / Port Method
-//<<< Clean Arch / Port Method
-    public static void updateOrderStatus(Served served){
-        
+
+    //>>> Clean Arch / Port Method
+    //<<< Clean Arch / Port Method
+    public static void updateOrderStatus(Served served) {
         //implement business logic here:
-        
+
         /** Example 1:  new item 
         TableOrder tableOrder = new TableOrder();
         repository().save(tableOrder);
@@ -177,14 +140,15 @@ public class TableOrder  {
          });
         */
 
-        
     }
-//>>> Clean Arch / Port Method
-//<<< Clean Arch / Port Method
-    public static void changePaymentStatus(RequstPaymentCompleted requstPaymentCompleted){
-        
+
+    //>>> Clean Arch / Port Method
+    //<<< Clean Arch / Port Method
+    public static void changePaymentStatus(
+        RequstPaymentCompleted requstPaymentCompleted
+    ) {
         //implement business logic here:
-        
+
         /** Example 1:  new item 
         TableOrder tableOrder = new TableOrder();
         repository().save(tableOrder);
@@ -203,10 +167,8 @@ public class TableOrder  {
          });
         */
 
-        
     }
-//>>> Clean Arch / Port Method
-
+    //>>> Clean Arch / Port Method
 
 }
 //>>> DDD / Aggregate Root

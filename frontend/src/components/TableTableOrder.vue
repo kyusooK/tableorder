@@ -22,7 +22,7 @@
             <Number label="결제정보" v-model="value.paymentId" :editMode="editMode" :inputUI="''"/>
             <String label="결제 상태" v-model="value.paymentStatus" :editMode="editMode" :inputUI="''"/>
             <Date label="주문일자" v-model="value.orderDate" :editMode="editMode" :inputUI="''"/>
-            <MenuIds offline label="menuIds" v-model="value.menuIds" :editMode="editMode" @change="change"/>
+            <MenuId offline label="메뉴 ID" v-model="value.menuId" :editMode="editMode" @change="change"/>
         </v-card-text>
 
         <v-card-actions style="background-color: white;">
@@ -49,7 +49,7 @@
                     text
                     @click="save"
                 >
-                저장
+                    주문
                 </v-btn>
                 <v-btn
                     color="primary"
@@ -63,14 +63,6 @@
         </v-card-actions>
         <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn
-                v-if="!editMode"
-                color="primary"
-                text
-                @click="order"
-            >
-                Order
-            </v-btn>
         </v-card-actions>
 
         <v-snackbar
@@ -204,27 +196,6 @@
             },
             change(){
                 this.$emit('input', this.value);
-            },
-            async order() {
-                try {
-                    if(!this.offline){
-                        var temp = await axios.post(axios.fixUrl(this.value._links['/order'].href))
-                        for(var k in temp.data) this.value[k]=temp.data[k];
-                    }
-
-                    this.editMode = false;
-                    
-                    this.$emit('input', this.value);
-                    this.$emit('delete', this.value);
-                
-                } catch(e) {
-                    this.snackbar.status = true
-                    if(e.response && e.response.data.message) {
-                        this.snackbar.text = e.response.data.message
-                    } else {
-                        this.snackbar.text = e
-                    }
-                }
             },
         },
     }

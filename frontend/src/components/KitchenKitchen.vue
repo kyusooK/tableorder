@@ -16,11 +16,11 @@
         </v-card-title >        
 
         <v-card-text style="background-color: white;">
-            <TableOrderId offline label="tableOrderId" v-model="value.tableOrderId" :editMode="editMode" @change="change"/>
-            <MenuIdManager offline label="menuId" v-model="value.menuId" :editMode="editMode" @change="change"/>
             <String label="주문정보" v-model="value.orderInfo" :editMode="editMode" :inputUI="''"/>
             <String label="주문요청서" v-model="value.requestInfo" :editMode="editMode" :inputUI="''"/>
             <FoodStatus offline label="음식상태" v-model="value.foodStatus" :editMode="editMode" @change="change"/>
+            <TableOrderId offline label="테이블주문 ID" v-model="value.tableOrderId" :editMode="editMode" @change="change"/>
+            <MenuId offline label="메뉴 ID" v-model="value.menuId" :editMode="editMode" @change="change"/>
         </v-card-text>
 
         <v-card-actions style="background-color: white;">

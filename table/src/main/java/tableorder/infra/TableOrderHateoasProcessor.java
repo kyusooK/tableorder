@@ -12,12 +12,6 @@ public class TableOrderHateoasProcessor
 
     @Override
     public EntityModel<TableOrder> process(EntityModel<TableOrder> model) {
-        model.add(
-            Link
-                .of(model.getRequiredLink("self").getHref() + "/order")
-                .withRel("order")
-        );
-
         return model;
     }
 }

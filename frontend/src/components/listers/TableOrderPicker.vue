@@ -33,7 +33,7 @@
                                 OrderDate :  {{item.orderDate }}
                             </v-list-item-subtitle>
                             <v-list-item-subtitle>
-                                MenuIds :  {{item.menuIds }}
+                                MenuId :  {{item.menuId }}
                             </v-list-item-subtitle>
                         </v-list-item-content>
 

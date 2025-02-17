@@ -39,7 +39,7 @@ mvn spring-boot:run
 ```
 - table
 ```
- http :8088/tableOrders id="id"requestInfo="requestInfo"price="price"OrderStatus = "ORDERPLACED"paymentId="paymentId"paymentStatus="paymentStatus"orderDate="orderDate"MenuIds := '{"id": 0}'
+ http :8088/tableOrders id="id"requestInfo="requestInfo"price="price"OrderStatus = "ORDERPLACED"paymentId="paymentId"paymentStatus="paymentStatus"orderDate="orderDate"
 ```
 - salesanalysis
 ```
@@ -47,7 +47,7 @@ mvn spring-boot:run
 ```
 - kitchen
 ```
- http :8088/kitchens id="id"TableOrderId := '{"id": 0}'orderInfo="orderInfo"requestInfo="requestInfo"FoodStatus = "ACCEPTED"
+ http :8088/kitchens id="id"orderInfo="orderInfo"requestInfo="requestInfo"FoodStatus = "ACCEPTED"
 ```
 
 
