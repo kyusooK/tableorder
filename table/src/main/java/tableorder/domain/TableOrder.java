@@ -28,6 +28,7 @@ public class TableOrder  {
     private String requestInfo;
     
     private Long price;
+
     
     @Enumerated(EnumType.STRING)
     private OrderStatus orderStatus;
@@ -51,9 +52,11 @@ public class TableOrder  {
     public void onPostPersist() {
 
         List<Long> menuIds = this.menuIds.stream().map(MenuId::getId).collect(Collectors.toList());
-        MenuService menuService = TableApplication.applicationContext.getBean(MenuService.class);
-        List<Menu> menus = menuService.getMenus(menuIds);
 
+        List<Menu> menus = TableApplication.applicationContext
+        .getBean(tableorder.external.MenuService.class)
+        .getMenus(menuIds);
+            
         if (menus != null && !menus.isEmpty()) {
 
             Long totalPrice = menus.stream()
@@ -61,17 +64,16 @@ public class TableOrder  {
                                 .reduce(0L, Long::sum);
             
             LocalDateTime todayDate = LocalDateTime.now();
-
+    
             this.setPrice(totalPrice);
             this.setOrderDate(Date.from(todayDate.atZone(ZoneId.systemDefault()).toInstant()));
-
+    
             OrderPlaced orderPlaced = new OrderPlaced(this);
             orderPlaced.publishAfterCommit();
         } else {
             // 메뉴가 없을 경우 처리할 로직 (예: 예외 발생 또는 로그 기록)
             throw new RuntimeException("주문할 수 있는 메뉴가 없습니다.");
         }
-        
     }
 
 //<<< Clean Arch / Port Method
