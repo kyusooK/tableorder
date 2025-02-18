@@ -18,6 +18,7 @@ public class Menu {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    
 
     private String menuName;
 

@@ -10,4 +10,6 @@ import tableorder.domain.*;
     path = "orderPages"
 )
 public interface OrderPageRepository
-    extends PagingAndSortingRepository<OrderPage, Long> {}
+    extends PagingAndSortingRepository<OrderPage, Long> {
+
+    List<OrderPage> findByOrderId(Long id);}

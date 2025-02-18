@@ -16,6 +16,8 @@ public class OrderPage {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
 
+    private Long orderId;
+    private String menuName;
     private String orderInfo;
     private String requestInfo;
     private String orderStatus;

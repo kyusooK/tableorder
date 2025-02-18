@@ -1,17 +1,14 @@
 package tableorder.infra;
 
+import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Service;
-
 import tableorder.config.kafka.KafkaProcessor;
-import tableorder.domain.Cooked;
-import tableorder.domain.OrderAccepted;
-import tableorder.domain.OrderPage;
-import tableorder.domain.Served;
+import tableorder.domain.*;
 
 @Service
 public class OrderPageViewHandler {
@@ -35,6 +32,7 @@ public class OrderPageViewHandler {
             orderPage.setOrderStatus(
                 String.valueOf(orderAccepted.getFoodStatus())
             );
+            orderPage.setOrderId(orderAccepted.getId());
             // view 레파지 토리에 save
             orderPageRepository.save(orderPage);
         } catch (Exception e) {
@@ -47,12 +45,11 @@ public class OrderPageViewHandler {
         try {
             if (!cooked.validate()) return;
             // view 객체 조회
-            Optional<OrderPage> orderPageOptional = orderPageRepository.findById(
+
+            List<OrderPage> orderPageList = orderPageRepository.findByOrderId(
                 cooked.getId()
             );
-
-            if (orderPageOptional.isPresent()) {
-                OrderPage orderPage = orderPageOptional.get();
+            for (OrderPage orderPage : orderPageList) {
                 // view 객체에 이벤트의 eventDirectValue 를 set 함
                 orderPage.setOrderStatus(
                     String.valueOf(cooked.getFoodStatus())
@@ -70,12 +67,11 @@ public class OrderPageViewHandler {
         try {
             if (!served.validate()) return;
             // view 객체 조회
-            Optional<OrderPage> orderPageOptional = orderPageRepository.findById(
+
+            List<OrderPage> orderPageList = orderPageRepository.findByOrderId(
                 served.getId()
             );
-
-            if (orderPageOptional.isPresent()) {
-                OrderPage orderPage = orderPageOptional.get();
+            for (OrderPage orderPage : orderPageList) {
                 // view 객체에 이벤트의 eventDirectValue 를 set 함
                 orderPage.setOrderStatus(
                     String.valueOf(served.getFoodStatus())

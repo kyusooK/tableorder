@@ -69,7 +69,29 @@ public class Sales {
 
          });
         */
+        //아이디 토대로 조회하였을 때 나온 MenuName과 등록된 값중 menu와 일치하는지 확인. 
 
+        // 이후, 등록된 내용이 있을 경우 날짜를 조회하여 날짜가 일치하는지 확인 (다를경우 새로 등록 같은 경우 이전 정보 업데이트)
+
+        // Sales sales = new Sales();
+
+        // sales.setMenu(); // 받아온 id에서 조회하였을 때의 이름
+        // sales.setOrderDate(orderPlaced.getOrderDate());
+        // sales.setTotalOrderCount(1);
+        // sales.setTotalPrice(); // 받아온 id에서 조회하였을 때의 가격
+
+        // repository().save(sales);
+
+
+        // SalesDataRegistered salesDataRegistered = new SalesDataRegistered(sales);
+        //     salesDataRegistered.publishAfterCommit();
+
+
+        // sales.setTotalOrderCount(sales.getTotalOrderCount + 1);
+        // sales.setTotalPrice(sales.getTotalPrice() +) // 받아온 id에서 조회하였을 때 가격 더하기
+
+        // SalesDataUpdated salesDataUpdated = new SalesDataUpdated(sales);
+        // salesDataUpdated.publishAfterCommit();
     }
     //>>> Clean Arch / Port Method
 

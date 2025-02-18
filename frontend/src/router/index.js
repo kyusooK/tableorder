@@ -15,18 +15,18 @@ const router = createRouter({
       path: '/tableOrders',
       component: () => import('../components/ui/TableOrderGrid.vue'),
     },
-    {
-      path: '/orderPages',
-      component: () => import('../components/OrderPageView.vue'),
-    },
+    // {
+    //   path: '/orderPages',
+    //   component: () => import('../components/OrderPageView.vue'),
+    // },
     {
       path: '/sales',
       component: () => import('../components/ui/SalesGrid.vue'),
     },
-    {
-      path: '/salesDataAnalyses',
-      component: () => import('../components/SalesDataAnalysisView.vue'),
-    },
+    // {
+    //   path: '/salesDataAnalyses',
+    //   component: () => import('../components/SalesDataAnalysisView.vue'),
+    // },
     {
       path: '/kitchens',
       component: () => import('../components/ui/KitchenGrid.vue'),
