@@ -1,14 +1,17 @@
 package tableorder.infra;
 
-import java.io.IOException;
-import java.util.List;
 import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Service;
+
 import tableorder.config.kafka.KafkaProcessor;
-import tableorder.domain.*;
+import tableorder.domain.Cooked;
+import tableorder.domain.OrderAccepted;
+import tableorder.domain.OrderPage;
+import tableorder.domain.Served;
 
 @Service
 public class OrderPageViewHandler {
@@ -27,7 +30,6 @@ public class OrderPageViewHandler {
             // view 객체 생성
             OrderPage orderPage = new OrderPage();
             // view 객체에 이벤트의 Value 를 set 함
-            orderPage.setMenuName(orderAccepted.getMenuId().toString());
             orderPage.setOrderInfo(orderAccepted.getOrderInfo());
             orderPage.setRequestInfo(orderAccepted.getRequestInfo());
             orderPage.setOrderStatus(
