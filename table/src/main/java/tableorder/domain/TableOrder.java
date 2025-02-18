@@ -26,8 +26,8 @@ public class TableOrder  {
     private Long id;
     
     private String requestInfo;
-    
-    private Long price;
+
+    private Long totalPrice;
 
     
     @Enumerated(EnumType.STRING)
@@ -41,7 +41,6 @@ public class TableOrder  {
     
     @ElementCollection
     private List<MenuId> menuIds;
-
 
     public static TableOrderRepository repository(){
         TableOrderRepository tableOrderRepository = TableApplication.applicationContext.getBean(TableOrderRepository.class);

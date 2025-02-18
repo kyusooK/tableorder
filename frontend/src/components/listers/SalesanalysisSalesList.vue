@@ -123,7 +123,7 @@
                 'menu': '',
                 'totalOrderCount': 0,
                 'totalPrice': 0,
-                'orderDate': '2025-02-17',
+                'orderDate': '2025-02-18',
             }
         },
         methods: {

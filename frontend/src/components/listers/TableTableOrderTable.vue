@@ -68,7 +68,7 @@
                 [
                     { text: "id", value: "id" },
                     { text: "requestInfo", value: "requestInfo" },
-                    { text: "price", value: "price" },
+                    { text: "totalPrice", value: "totalPrice" },
                     { text: "orderStatus", value: "orderStatus" },
                     { text: "paymentId", value: "paymentId" },
                     { text: "paymentStatus", value: "paymentStatus" },
@@ -92,12 +92,12 @@
 
             this.newValue = {
                 'requestInfo': '',
-                'price': 0,
+                'totalPrice': 0,
                 'orderStatus': '',
                 'paymentId': 0,
                 'paymentStatus': '',
-                'orderDate': '2025-02-17',
-                'menuId': {},
+                'orderDate': '2025-02-18',
+                'menuId': [],
             }
         },
         methods: {

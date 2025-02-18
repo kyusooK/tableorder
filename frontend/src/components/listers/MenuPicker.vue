@@ -21,9 +21,6 @@
                                 Price :  {{item.price }}
                             </v-list-item-subtitle>
                             <v-list-item-subtitle>
-                                Stock :  {{item.stock }}
-                            </v-list-item-subtitle>
-                            <v-list-item-subtitle>
                                 MenuInfo :  {{item.menuInfo }}
                             </v-list-item-subtitle>
                             <v-list-item-subtitle>
@@ -31,6 +28,9 @@
                             </v-list-item-subtitle>
                             <v-list-item-subtitle>
                                 ReviewId :  {{item.reviewId }}
+                            </v-list-item-subtitle>
+                            <v-list-item-subtitle>
+                                Stock :  {{item.stock }}
                             </v-list-item-subtitle>
                         </v-list-item-content>
 

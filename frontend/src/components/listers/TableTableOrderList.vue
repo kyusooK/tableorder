@@ -53,7 +53,7 @@
                         <v-list-item-subtitle style="font-size:25px; font-weight:700;">
                             [ Id :  {{data.id }} ] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             [ RequestInfo :  {{data.requestInfo }} ] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            [ Price :  {{data.price }} ] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            [ TotalPrice :  {{data.totalPrice }} ] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             [ OrderStatus :  {{data.orderStatus }} ] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             [ PaymentId :  {{data.paymentId }} ] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             [ PaymentStatus :  {{data.paymentStatus }} ] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -127,12 +127,12 @@
             
             this.newValue = {
                 'requestInfo': '',
-                'price': 0,
+                'totalPrice': 0,
                 'orderStatus': '',
                 'paymentId': 0,
                 'paymentStatus': '',
-                'orderDate': '2025-02-17',
-                'menuId': {},
+                'orderDate': '2025-02-18',
+                'menuId': [],
             }
         },
         methods: {

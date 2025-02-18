@@ -1,20 +1,27 @@
 <template>
-
-    <v-card outlined>
+    <v-card outlined @click="openDialog">
         <v-card-title>
-            MenuId
+            Menu : {{ referenceValue ? referenceValue._links.self.href.split('/').pop() : '' }}
         </v-card-title>
 
-        <v-card-text>
-        </v-card-text>
-
-        <v-card-actions v-if="inList">
-            <slot name="actions"></slot>
-        </v-card-actions>
+        <v-dialog v-model="pickerDialog">
+            <v-card>
+                <v-card-title>Menu</v-card-title>
+                <v-card-text>
+                    <MenuPicker v-model="value" @selected="pick"/>
+                </v-card-text>
+                <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn color="primary" text @click="pickerDialog = false">Close</v-btn>
+                </v-card-actions>
+            </v-card>
+        </v-dialog>
     </v-card>
+
 </template>
 
 <script>
+    const axios = require('axios').default;
 
     export default {
         name: 'MenuId',
@@ -28,12 +35,23 @@
             label: String,
         },
         data: () => ({
+            newValue: {},
+            pickerDialog: false,
+            referenceValue: null,
         }),
         async created() {
             if(!Object.values(this.value)[0]) {
                 this.$emit('input', {});
                 this.newValue = {
                     'id': '',
+                }
+            }
+            else {
+                this.newValue = this.value;
+                var path = '/menus';
+                var temp = await axios.get(axios.fixUrl(path + '/' +  Object.values(this.value)[0]));
+                if(temp.data) {
+                    this.referenceValue = temp.data
                 }
             }
         },
@@ -69,6 +87,25 @@
             },
             change(){
                 this.$emit('change', this.value);
+            },
+            openDialog() {
+                var path = '/menus/';
+
+                if(this.editMode) {
+                    this.pickerDialog = true;
+                } else {
+                    this.pickerDialog = false;
+                    this.$router.push(path + this.value.menuId);
+                }
+            },
+            async pick(val){
+                this.newValue = val;
+                var path = '/menus';
+                var temp = await axios.get(axios.fixUrl(path + '/' + val.menuId));
+                if(temp.data) {
+                    this.referenceValue = temp.data;
+                }
+                this.referenceValue.nameField = val.nameField;
             },
         }
     }
