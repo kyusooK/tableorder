@@ -30,9 +30,6 @@ public class Kitchen {
     @Embedded
     private TableOrderId tableOrderId;
 
-    @Embedded
-    private MenuId menuId;
-
     public static KitchenRepository repository() {
         KitchenRepository kitchenRepository = KitchenApplication.applicationContext.getBean(
             KitchenRepository.class
@@ -55,40 +52,6 @@ public class Kitchen {
 
         Served served = new Served(this);
         served.publishAfterCommit();
-    }
-
-    //>>> Clean Arch / Port Method
-
-    //<<< Clean Arch / Port Method
-    public static void acceptOrder(OrderPlaced orderPlaced) {
-        //implement business logic here:
-
-        /** Example 1:  new item 
-        Kitchen kitchen = new Kitchen();
-        repository().save(kitchen);
-
-        OrderAccepted orderAccepted = new OrderAccepted(kitchen);
-        orderAccepted.publishAfterCommit();
-        */
-
-        /** Example 2:  finding and process
-        
-        // if orderPlaced.menuId exists, use it
-        
-        // ObjectMapper mapper = new ObjectMapper();
-        // Map<Long, Object> tableOrderMap = mapper.convertValue(orderPlaced.getMenuId(), Map.class);
-
-        repository().findById(orderPlaced.get???()).ifPresent(kitchen->{
-            
-            kitchen // do something
-            repository().save(kitchen);
-
-            OrderAccepted orderAccepted = new OrderAccepted(kitchen);
-            orderAccepted.publishAfterCommit();
-
-         });
-        */
-
     }
     //>>> Clean Arch / Port Method
 

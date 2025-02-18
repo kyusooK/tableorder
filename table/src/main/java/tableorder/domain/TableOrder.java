@@ -33,8 +33,10 @@ public class TableOrder {
 
     private Date orderDate;
 
+    private String orderInfo;
+
     @ElementCollection
-    private List<MenuId> menuId;
+    private List<MenuIds> menuIds;
 
     @PostPersist
     public void onPostPersist() {
@@ -61,11 +63,10 @@ public class TableOrder {
 
         /** Example 2:  finding and process
         
-        // if orderAccepted.tableOrderIdmenuId exists, use it
+        // if orderAccepted.tableOrderId exists, use it
         
         // ObjectMapper mapper = new ObjectMapper();
         // Map<Long, Object> kitchenMap = mapper.convertValue(orderAccepted.getTableOrderId(), Map.class);
-        // Map<Long, Object> kitchenMap = mapper.convertValue(orderAccepted.getMenuId(), Map.class);
 
         repository().findById(orderAccepted.get???()).ifPresent(tableOrder->{
             
@@ -91,11 +92,10 @@ public class TableOrder {
 
         /** Example 2:  finding and process
         
-        // if cooked.tableOrderIdmenuId exists, use it
+        // if cooked.tableOrderId exists, use it
         
         // ObjectMapper mapper = new ObjectMapper();
         // Map<Long, Object> kitchenMap = mapper.convertValue(cooked.getTableOrderId(), Map.class);
-        // Map<Long, Object> kitchenMap = mapper.convertValue(cooked.getMenuId(), Map.class);
 
         repository().findById(cooked.get???()).ifPresent(tableOrder->{
             
@@ -121,11 +121,10 @@ public class TableOrder {
 
         /** Example 2:  finding and process
         
-        // if served.tableOrderIdmenuId exists, use it
+        // if served.tableOrderId exists, use it
         
         // ObjectMapper mapper = new ObjectMapper();
         // Map<Long, Object> kitchenMap = mapper.convertValue(served.getTableOrderId(), Map.class);
-        // Map<Long, Object> kitchenMap = mapper.convertValue(served.getMenuId(), Map.class);
 
         repository().findById(served.get???()).ifPresent(tableOrder->{
             

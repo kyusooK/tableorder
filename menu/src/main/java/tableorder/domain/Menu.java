@@ -30,8 +30,6 @@ public class Menu {
 
     private String reviewId;
 
-    private Integer stock;
-
     @PostPersist
     public void onPostPersist() {
         MenuRegistere menuRegistere = new MenuRegistere(this);

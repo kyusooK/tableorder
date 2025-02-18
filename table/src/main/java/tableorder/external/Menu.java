@@ -12,5 +12,4 @@ public class Menu {
     private String menuInfo;
     private String ingredients;
     private String reviewId;
-    private Integer stock;
 }

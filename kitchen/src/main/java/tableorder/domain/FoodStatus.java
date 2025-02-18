@@ -7,6 +7,7 @@ import lombok.Data;
 import org.springframework.beans.BeanUtils;
 
 public enum FoodStatus {
+    ORDERPLACED,
     ACCEPTED,
     COOKED,
     SERVED,

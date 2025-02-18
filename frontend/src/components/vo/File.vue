@@ -5,7 +5,7 @@
         </v-card-title>
         <v-card-text v-if="value">
             <div v-if="editMode" style="margin-top:-20px;">
-                <v-file-input label="파일 입려" v-model="file" @change="change"/>
+                <v-file-input label="File input" v-model="file" @change="change"/>
             </div>
             <div v-else style="cursor: pointer;">
                 <div @click="download">
@@ -51,7 +51,7 @@
                         "file": result,
                         "fileName": me.value.fileName
                     }
-                    me.$emit("input", newValue);
+                    me.$emit("update:modelValue", newValue);
                 };
                 reader.readAsDataURL( this.file );
                 this.value.fileName = this.file.name
