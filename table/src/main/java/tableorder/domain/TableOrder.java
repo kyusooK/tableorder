@@ -109,8 +109,8 @@ public class TableOrder  {
                     throw new RuntimeException("메뉴가 존재하지 않습니다: " + id); // 메뉴가 없을 경우 예외 발생
                 }
     
-                menuTotalPrice += menu.getPrice() * menu.getStock(); // 가격과 수량 곱하기
-                order += "주문 메뉴: " + menu.getMenuName() + " " + "갯수: " + menu.getStock() + " / ";
+                menuTotalPrice += menu.getPrice();
+                order += "주문 메뉴: " + menu.getMenuName() + " / ";
 
                 // 주문일자를 오늘로 변환하여 저장
             } catch (HttpClientErrorException e) {
@@ -129,8 +129,6 @@ public class TableOrder  {
 
 //<<< Clean Arch / Port Method
     public static void updateOrderStatus(OrderAccepted orderAccepted){
-        
-        
         
         ObjectMapper mapper = new ObjectMapper();
         Map<Long, Object> kitchenMap = mapper.convertValue(orderAccepted.getTableOrderId(), Map.class);

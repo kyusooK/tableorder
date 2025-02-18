@@ -18,7 +18,6 @@ public class MenuRegistered extends AbstractEvent {
     private String ingredients;
     private String requestInfo;
     private FoodStatus foodStatus;
-    private Integer stock;
 
     public MenuRegistered(Menu aggregate) {
         super(aggregate);

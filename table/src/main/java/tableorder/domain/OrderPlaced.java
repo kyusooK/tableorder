@@ -19,7 +19,6 @@ public class OrderPlaced extends AbstractEvent {
     private OrderStatus orderStatus;
     private String paymentId;
     private String paymentStatus;
-
     private Date orderDate;
 
     public OrderPlaced(TableOrder aggregate) {

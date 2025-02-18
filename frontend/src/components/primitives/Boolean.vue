@@ -1,45 +1,44 @@
 <template>
     <div>
-        <div v-if="editMode" style="margin-top:-20px;">
-            <v-radio-group 
-                    v-model="value" 
-                    row
-                    @change="change">
-                <template v-slot:label>
-                    <div>{{label}}</div>
-                </template>
-                <v-radio
-                        label="Y"
-                        value="true"
-                ></v-radio>
-                <v-radio
-                        label="N"
-                        value="false"
-                ></v-radio>
-            </v-radio-group>
+        <div v-if="editMode" style="margin-top:5px;">
+            <div class="label-title">{{label}}</div>
+            <v-switch
+                v-bind="$attrs"
+                v-model="value"
+                hide-details
+                inset
+                @change="change"
+                label="입력하세요."
+            >
+            </v-switch>
         </div>
         <div v-else>
             {{label}} :  {{value}}
         </div>
     </div>
 </template>
-
 <script>
     export default {
         name: 'Boolean',
         components:{
         },
         props: {
-            value:{
+            modelValue:{
                 type: Boolean,
                 default: false
             },
             editMode: Boolean,
-            label: String
+            label: String,
+        },
+        data: () => ({
+            value: null,
+        }),
+        created(){
+            this.value = this.modelValue
         },
         methods:{
             change(){
-                this.$emit("input", this.value);
+                this.$emit("update:modelValue", this.value);
             }
         }
     }

@@ -3,10 +3,22 @@
 ## Model
 www.msaez.io/#/123912988/storming/kttableorder
 
+## frontend
+node -v : 18.17.0
+npm -v : 9.9.4
+
+
+```
+cd front
+npm install
+npm run dev
+```
+
+
 ## Before Running Services
 ### Make sure there is a Kafka server running
 ```
-cd kafka
+cd infra
 docker-compose up
 ```
 - Check the Kafka messages:
@@ -35,11 +47,11 @@ mvn spring-boot:run
 ## Test by API
 - menu
 ```
- http :8088/menus id="id"menuName="menuName"price="price"menuInfo="menuInfo"ingredients="ingredients"reviewId="reviewId"stock="stock"
+ http :8088/menus id="id"menuName="menuName"price="price"menuInfo="menuInfo"ingredients="ingredients"reviewId="reviewId"
 ```
 - table
 ```
- http :8088/tableOrders id="id"requestInfo="requestInfo"totalPrice="totalPrice"OrderStatus = "ORDERPLACED"paymentId="paymentId"paymentStatus="paymentStatus"orderDate="orderDate"
+ http :8088/tableOrders id="id"requestInfo="requestInfo"totalPrice="totalPrice"OrderStatus = "ORDERPLACED"paymentId="paymentId"paymentStatus="paymentStatus"orderDate="orderDate"orderInfo="orderInfo"
 ```
 - salesanalysis
 ```
@@ -47,7 +59,7 @@ mvn spring-boot:run
 ```
 - kitchen
 ```
- http :8088/kitchens id="id"orderInfo="orderInfo"requestInfo="requestInfo"FoodStatus = "ACCEPTED"TableOrderId := '{"id": 0}'MenuId := '{"id": 0}'
+ http :8088/kitchens id="id"orderInfo="orderInfo"requestInfo="requestInfo"FoodStatus = "ACCEPTED"TableOrderId := '{"id": 0}'
 ```
 
 
