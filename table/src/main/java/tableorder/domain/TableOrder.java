@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -97,7 +98,7 @@ public class TableOrder  {
         Long menuTotalPrice = 0L;
         String order = "";
 
-        for (MenuId menuId : menuIds) {
+        for (MenuId menuId : new ArrayList<>(menuIds)) {
             // MenuId에서 ID를 추출하여 URL 구성
             Long id = menuId.getId(); // MenuId에서 Long 타입의 ID 추출
             String url = "http://localhost:8082/menus/" + id; // Menu API URL
@@ -122,6 +123,8 @@ public class TableOrder  {
         this.setTotalPrice(menuTotalPrice);
         this.setOrderStatus(orderStatus);
         this.setOrderInfo(order);
+
+        repository().save(this);
 
         OrderPlaced orderPlaced = new OrderPlaced(this);
         orderPlaced.publishAfterCommit();

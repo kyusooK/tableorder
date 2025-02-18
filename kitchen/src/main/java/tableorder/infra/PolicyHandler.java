@@ -35,7 +35,7 @@ public class PolicyHandler {
             "\n\n##### listener AcceptOrder : " + orderPlaced + "\n\n"
         );
         // Sample Logic //
-
+        Kitchen.acceptOrder(event);
     }
 }
 //>>> Clean Arch / Inbound Adaptor
