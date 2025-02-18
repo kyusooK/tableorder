@@ -101,3 +101,23 @@ sudo ./aws/install
 curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
 sudo mv /tmp/eksctl /usr/local/bin
 ```
+
+Menu등록
+```
+http :8082/menus menuName=피자 price=20000 menuInfo="불고기 토핑을 얹은 불고기 피자입니다" ingredients="밀가루, 치즈, 토마토소스, 불고기, 페퍼로니" 
+http :8082/menus menuName=탕수육 price=20000 menuInfo="중식 느낌의 탕수육" ingredients="돼지고기, 식용유, 밀가루" 
+```
+
+주문
+```
+ http :8083/tableOrders requestInfo="탕수육 소스는 따로 제공부탁드립니다" orderStatus=ORDERPLACED menuIds:='[{"id":1}, {"id":2}]'
+ http :8083/tableOrders
+ http :8083/orderPages
+```
+
+주방
+```
+http :8085/kitchens
+http PUT :8085/kitchens/1/cook foodStatus=COOKED
+http PUT :8085/kitchens/1/serve foodStatus=SERVED
+```
