@@ -18,6 +18,6 @@ public class OrderPage {
 
     private Long orderId;
     private String orderInfo;
-    private String requestInfo;
+    private String requestInfo;s
     private String orderStatus;
 }
