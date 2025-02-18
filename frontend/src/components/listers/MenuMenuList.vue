@@ -53,10 +53,10 @@
                             [ Id :  {{data.id }} ] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             [ MenuName :  {{data.menuName }} ] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             [ Price :  {{data.price }} ] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            [ Stock :  {{data.stock }} ] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             [ MenuInfo :  {{data.menuInfo }} ] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             [ Ingredients :  {{data.ingredients }} ] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             [ ReviewId :  {{data.reviewId }} ] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            [ Stock :  {{data.stock }} ] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         </v-list-item-subtitle>
 
                     </v-list-item-content>
@@ -126,10 +126,10 @@
             this.newValue = {
                 'menuName': '',
                 'price': 0,
-                'stock': 0,
                 'menuInfo': '',
                 'ingredients': '',
                 'reviewId': '',
+                'stock': 0,
             }
         },
         methods: {

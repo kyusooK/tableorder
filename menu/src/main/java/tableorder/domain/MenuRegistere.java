@@ -14,11 +14,11 @@ public class MenuRegistere extends AbstractEvent {
     private Long id;
     private String menuName;
     private Long price;
-    private Integer stock;
     private String menuInfo;
     private String ingredients;
     private String requestInfo;
     private FoodStatus foodStatus;
+    private Integer stock;
 
     public MenuRegistere(Menu aggregate) {
         super(aggregate);

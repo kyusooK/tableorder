@@ -110,10 +110,10 @@
             me.newValue = {
                 'menuName': '',
                 'price': 0,
-                'stock': 0,
                 'menuInfo': '',
                 'ingredients': '',
                 'reviewId': '',
+                'stock': 0,
             }
         },
         methods:{

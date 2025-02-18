@@ -22,7 +22,7 @@ public class TableOrder {
 
     private String requestInfo;
 
-    private Long price;
+    private Long totalPrice;
 
     @Enumerated(EnumType.STRING)
     private OrderStatus orderStatus;
@@ -33,8 +33,8 @@ public class TableOrder {
 
     private Date orderDate;
 
-    @Embedded
-    private MenuId menuId;
+    @ElementCollection
+    private List<MenuId> menuId;
 
     @PostPersist
     public void onPostPersist() {
@@ -47,10 +47,6 @@ public class TableOrder {
             TableOrderRepository.class
         );
         return tableOrderRepository;
-    }
-
-    public void order() {
-        //
     }
 
     //<<< Clean Arch / Port Method

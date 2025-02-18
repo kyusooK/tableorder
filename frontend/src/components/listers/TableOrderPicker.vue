@@ -18,7 +18,7 @@
                                 RequestInfo :  {{item.requestInfo }}
                             </v-list-item-subtitle>
                             <v-list-item-subtitle>
-                                Price :  {{item.price }}
+                                TotalPrice :  {{item.totalPrice }}
                             </v-list-item-subtitle>
                             <v-list-item-subtitle>
                                 OrderStatus :  {{item.orderStatus }}

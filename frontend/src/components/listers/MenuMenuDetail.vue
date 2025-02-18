@@ -12,9 +12,6 @@
                 <Number label="Price" v-model="item.price" :editMode="editMode" @change="change" />
             </div>
             <div>
-                <Number label="Stock" v-model="item.stock" :editMode="editMode" @change="change" />
-            </div>
-            <div>
                 <String label="MenuInfo" v-model="item.menuInfo" :editMode="editMode" @change="change" />
             </div>
             <div>
@@ -22,6 +19,9 @@
             </div>
             <div>
                 <String label="ReviewId" v-model="item.reviewId" :editMode="editMode" @change="change" />
+            </div>
+            <div>
+                <Number label="Stock" v-model="item.stock" :editMode="editMode" @change="change" />
             </div>
         </v-card-text>
 

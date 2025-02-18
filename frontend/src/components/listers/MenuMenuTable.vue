@@ -69,10 +69,10 @@
                     { text: "id", value: "id" },
                     { text: "menuName", value: "menuName" },
                     { text: "price", value: "price" },
-                    { text: "stock", value: "stock" },
                     { text: "menuInfo", value: "menuInfo" },
                     { text: "ingredients", value: "ingredients" },
                     { text: "reviewId", value: "reviewId" },
+                    { text: "stock", value: "stock" },
                 ],
             menu : [],
             newValue: {},
@@ -92,10 +92,10 @@
             this.newValue = {
                 'menuName': '',
                 'price': 0,
-                'stock': 0,
                 'menuInfo': '',
                 'ingredients': '',
                 'reviewId': '',
+                'stock': 0,
             }
         },
         methods: {

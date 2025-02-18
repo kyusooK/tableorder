@@ -35,11 +35,11 @@ mvn spring-boot:run
 ## Test by API
 - menu
 ```
- http :8088/menus id="id"menuName="menuName"price="price"stock="stock"menuInfo="menuInfo"ingredients="ingredients"reviewId="reviewId"
+ http :8088/menus id="id"menuName="menuName"price="price"menuInfo="menuInfo"ingredients="ingredients"reviewId="reviewId"stock="stock"
 ```
 - table
 ```
- http :8088/tableOrders id="id"requestInfo="requestInfo"price="price"OrderStatus = "ORDERPLACED"paymentId="paymentId"paymentStatus="paymentStatus"orderDate="orderDate"
+ http :8088/tableOrders id="id"requestInfo="requestInfo"totalPrice="totalPrice"OrderStatus = "ORDERPLACED"paymentId="paymentId"paymentStatus="paymentStatus"orderDate="orderDate"
 ```
 - salesanalysis
 ```
@@ -47,7 +47,7 @@ mvn spring-boot:run
 ```
 - kitchen
 ```
- http :8088/kitchens id="id"orderInfo="orderInfo"requestInfo="requestInfo"FoodStatus = "ACCEPTED"
+ http :8088/kitchens id="id"orderInfo="orderInfo"requestInfo="requestInfo"FoodStatus = "ACCEPTED"TableOrderId := '{"id": 0}'MenuId := '{"id": 0}'
 ```
 
 

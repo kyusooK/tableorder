@@ -18,10 +18,10 @@
         <v-card-text style="background-color: white;">
             <String label="메뉴명" v-model="value.menuName" :editMode="editMode" :inputUI="''"/>
             <Number label="메뉴 가격" v-model="value.price" :editMode="editMode" :inputUI="''"/>
-            <Number label="메뉴 재고 수량" v-model="value.stock" :editMode="editMode" :inputUI="''"/>
             <String label="메뉴 설명" v-model="value.menuInfo" :editMode="editMode" :inputUI="''"/>
             <String label="사용 재료" v-model="value.ingredients" :editMode="editMode" :inputUI="''"/>
             <String label="리뷰ID" v-model="value.reviewId" :editMode="editMode" :inputUI="''"/>
+            <Number label="음식 수량" v-model="value.stock" :editMode="editMode" :inputUI="''"/>
         </v-card-text>
 
         <v-card-actions style="background-color: white;">

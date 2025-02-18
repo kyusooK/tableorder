@@ -24,13 +24,13 @@ public class Menu {
 
     private Long price;
 
-    private Integer stock;
-
     private String menuInfo;
 
     private String ingredients;
 
     private String reviewId;
+
+    private Integer stock;
 
     @PostPersist
     public void onPostPersist() {

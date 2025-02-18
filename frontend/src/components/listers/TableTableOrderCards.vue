@@ -109,12 +109,12 @@
             
             me.newValue = {
                 'requestInfo': '',
-                'price': 0,
+                'totalPrice': 0,
                 'orderStatus': '',
                 'paymentId': 0,
                 'paymentStatus': '',
-                'orderDate': '2025-02-17',
-                'menuId': {},
+                'orderDate': '2025-02-18',
+                'menuId': [],
             }
         },
         methods:{

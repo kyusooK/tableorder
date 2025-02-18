@@ -9,8 +9,8 @@ public class Menu {
     private Long id;
     private String menuName;
     private Long price;
-    private Integer stock;
     private String menuInfo;
     private String ingredients;
     private String reviewId;
+    private Integer stock;
 }

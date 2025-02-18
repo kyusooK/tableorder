@@ -9,7 +9,7 @@
                 <String label="RequestInfo" v-model="item.requestInfo" :editMode="editMode" @change="change" />
             </div>
             <div>
-                <Number label="Price" v-model="item.price" :editMode="editMode" @change="change" />
+                <Number label="TotalPrice" v-model="item.totalPrice" :editMode="editMode" @change="change" />
             </div>
             <OrderStatus offline label="OrderStatus" v-model="item.orderStatus" :editMode="false" :key="false" @change="change" />
             <div>
@@ -21,7 +21,7 @@
             <div>
                 <Date label="OrderDate" v-model="item.orderDate" :editMode="editMode" @change="change" />
             </div>
-            <MenuId offline label="MenuId" v-model="item.menuId" :editMode="false" :key="false" @change="change" />
+            <MenuIdManager offline label="MenuId" v-model="item.menuId" :editMode="false" @change="change" />
         </v-card-text>
 
         <v-card-actions>
