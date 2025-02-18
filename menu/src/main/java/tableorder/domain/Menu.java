@@ -8,7 +8,6 @@ import java.util.Map;
 import javax.persistence.*;
 import lombok.Data;
 import tableorder.MenuApplication;
-import tableorder.domain.MenuRegistere;
 
 @Entity
 @Table(name = "Menu_table")
@@ -34,8 +33,8 @@ public class Menu {
 
     @PostPersist
     public void onPostPersist() {
-        MenuRegistere menuRegistere = new MenuRegistere(this);
-        menuRegistere.publishAfterCommit();
+        MenuRegistered menuRegistered = new MenuRegistered(this);
+        menuRegistered.publishAfterCommit();
     }
 
     public static MenuRepository repository() {

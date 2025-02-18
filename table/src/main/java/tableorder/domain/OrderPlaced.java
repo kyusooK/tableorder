@@ -13,11 +13,13 @@ public class OrderPlaced extends AbstractEvent {
 
     private Long id;
     private String requestInfo;
-    private List<MenuId> menuId;
+    private String orderInfo;
+    private List<MenuId> menuIds;
     private Long totalPrice;
     private OrderStatus orderStatus;
     private String paymentId;
     private String paymentStatus;
+
     private Date orderDate;
 
     public OrderPlaced(TableOrder aggregate) {

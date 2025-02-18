@@ -9,7 +9,7 @@ import tableorder.infra.AbstractEvent;
 //<<< DDD / Domain Event
 @Data
 @ToString
-public class MenuRegistere extends AbstractEvent {
+public class MenuRegistered extends AbstractEvent {
 
     private Long id;
     private String menuName;
@@ -20,11 +20,11 @@ public class MenuRegistere extends AbstractEvent {
     private FoodStatus foodStatus;
     private Integer stock;
 
-    public MenuRegistere(Menu aggregate) {
+    public MenuRegistered(Menu aggregate) {
         super(aggregate);
     }
 
-    public MenuRegistere() {
+    public MenuRegistered() {
         super();
     }
 }

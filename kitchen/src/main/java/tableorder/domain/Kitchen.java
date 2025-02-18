@@ -1,10 +1,14 @@
 package tableorder.domain;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+
 import javax.persistence.*;
 import lombok.Data;
 import tableorder.KitchenApplication;
@@ -30,9 +34,6 @@ public class Kitchen {
     @Embedded
     private TableOrderId tableOrderId;
 
-    @Embedded
-    private List<MenuId> menuId;
-
     public static KitchenRepository repository() {
         KitchenRepository kitchenRepository = KitchenApplication.applicationContext.getBean(
             KitchenRepository.class
@@ -41,18 +42,18 @@ public class Kitchen {
     }
 
     public static void acceptOrder(OrderPlaced orderPlaced) {
-
+    
         Kitchen kitchen = new Kitchen();
-        kitchen.setMenuId(orderPlaced.getMenuId());
         kitchen.setTableOrderId(new TableOrderId(orderPlaced.getId()));
         kitchen.setFoodStatus(FoodStatus.ACCEPTED);
         kitchen.setRequestInfo(orderPlaced.getRequestInfo());
+        kitchen.setOrderInfo(orderPlaced.getOrderInfo());
+        
+        // 데이터베이스에 저장
         repository().save(kitchen);
-
+    
         OrderAccepted orderAccepted = new OrderAccepted(kitchen);
         orderAccepted.publishAfterCommit();
-        
-
     }
 
     public void cook(CookCommand cookCommand) {
