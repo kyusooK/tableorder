@@ -86,7 +86,7 @@
                         color="primary"
                         style="font-weight:700;"
                     >
-                        SalesDataAnalysis
+                        판매 데이터 분석
                     </v-list-item>
                     <v-list-item
                         class="px-2"
@@ -109,15 +109,15 @@
                 <router-view></router-view>
             </v-container>
             <v-container style="padding:0px;" v-else fluid>
-                <div style="width:100%; margin:0px 0px 20px 0px; position: relative;">
-                    <v-img style="width:100%; height:300px;"
-                        src=""
+                <div style="width:100%; position: relative;">
+                    <v-img style="width:100%; height:200px;"
+                        src="image/main.png"
                     ></v-img>
                     <div class="App-main-text-overlap"></div>
                     <div class="App-sub-text-overlap"></div>
                 </div>
                 <v-row class="pa-0 ma-0">
-                    <v-col cols="4" class="pa-0 pa-0" v-for="(aggregate, index) in aggregate" :key="index">
+                    <v-col cols="12" lg="3" md="4" sm="6" class="pa-0 pa-0" v-for="(aggregate, index) in aggregate" :key="index">
                         <div class="pa-4">
                             <v-card
                                 :key="aggregate.key"
@@ -160,44 +160,43 @@ export default {
                 description: 'Menu을 관리하는 화면입니다.', 
                 key: 'menus', 
                 route: '/menus/menus',
-                ImageUrl: '',
+                ImageUrl: '/image/open.svg',
             },
             { 
                 title: '테이블주문', 
                 description: 'TableOrder을 관리하는 화면입니다.', 
                 key: 'tableOrders', 
                 route: '/tables/tableOrders',
-                ImageUrl: '',
+                ImageUrl: '/image/list.svg',
             },
             { 
                 title: '매출', 
                 description: 'sales을 관리하는 화면입니다.', 
                 key: 'sales', 
                 route: '/salesanalyses/sales',
-                ImageUrl: '',
+                ImageUrl: '/image/market.svg',
             },
             { 
                 title: '주방', 
                 description: 'kitchen을 관리하는 화면입니다.', 
                 key: 'kitchens', 
                 route: '/kitchens/kitchens',
-                ImageUrl: '',
+                ImageUrl: '/image/kitchen.svg',
             },
             { 
                 title: '주문 이력', 
                 description: 'OrderPage을 관리하는 화면입니다.', 
                 key: 'orderPages', 
                 route: '/tables/orderPages',
-                ImageUrl: '',
+                ImageUrl: '/image/shopping-list.svg',
             },
             { 
-                title: 'SalesDataAnalysis', 
-                description: 'SalesDataAnalysis을 관리하는 화면입니다.', 
+                title: '판매 데이터 분석', 
+                description: '판매 데이터 분석을 관리하는 화면입니다.', 
                 key: 'salesDataAnalyses', 
                 route: '/salesanalyses/salesDataAnalyses',
-                ImageUrl: '',
+                ImageUrl: '/image/data.svg',
             },
-            
         ],
     }),
     
