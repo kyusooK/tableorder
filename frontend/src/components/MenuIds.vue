@@ -1,51 +1,76 @@
 <template>
 
-    <div>
-        <div class="detail-title">
-        MenuIds
-        </div>
-        <v-col>
-        </v-col>
+    <v-card outlined>
+        <v-card-title>
+            MenuIds
+        </v-card-title>
+
+        <v-card-text>
+        </v-card-text>
 
         <v-card-actions v-if="inList">
             <slot name="actions"></slot>
         </v-card-actions>
-    </div>
+    </v-card>
 </template>
 
 <script>
-import BaseEntity from './base-ui/BaseEntity.vue'
-import BasePicker from './base-ui/BasePicker.vue'
 
-export default {
-    name: 'MenuIds',
-    mixins:[BaseEntity],
-    components:{
-        BasePicker
-    },
-    data: () => ({
-        path: '',
-    }),
-    props: {
-    },
-    watch: {
-        value(val){
-            this.value = val;
-            this.change();
+    export default {
+        name: 'MenuIds',
+        components:{},
+        props: {
+            value: [Object, String, Number, Boolean, Array],
+            editMode: Boolean,
+            isNew: Boolean,
+            offline: Boolean,
+            inList: Boolean,
+            label: String,
         },
-    },
-    async created(){
-        this.value = this.modelValue
-        if (this.value && this.value.id !== undefined) {
-            this.value = await this.repository.findById(this.value.id)
+        data: () => ({
+        }),
+        async created() {
+            if(!Object.values(this.value)[0]) {
+                this.$emit('input', {});
+                this.newValue = {
+                    'id': '',
+                }
+            }
+        },
+        watch: {
+            value(val) {
+                this.$emit('input', val);
+            },
+            newValue(val) {
+                this.$emit('input', val);
+            },
+        },
+
+        methods: {
+            edit() {
+                this.editMode = true;
+            },
+            async add() {
+                this.editMode = false;
+                this.$emit('input', this.value);
+
+                if(this.isNew){
+                    this.$emit('add', this.value);
+                } else {
+                    this.$emit('edit', this.value);
+                }
+            },
+            async remove(){
+                this.editMode = false;
+                this.isDeleted = true;
+
+                this.$emit('input', this.value);
+                this.$emit('delete', this.value);
+            },
+            change(){
+                this.$emit('change', this.value);
+            },
         }
-    },
-    methods: {
-        pick(val){
-            this.value = val;
-            this.change();
-        },
     }
-}
 </script>
 
