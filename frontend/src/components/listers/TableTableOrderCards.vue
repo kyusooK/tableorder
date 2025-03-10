@@ -108,7 +108,7 @@
                 'paymentStatus': '',
                 'orderDate': '2025-03-05',
                 'orderInfo': '',
-                'menuIds': [],
+                'menuId': [],
             }
         },
         methods:{

@@ -23,7 +23,7 @@
             <String label="결제 상태" v-model="value.paymentStatus" :editMode="editMode" :inputUI="''"/>
             <Date label="주문일자" v-model="value.orderDate" :editMode="editMode" :inputUI="''"/>
             <String label="주문정보" v-model="value.orderInfo" :editMode="editMode" :inputUI="''"/>
-            <MenuIdsManager offline label="메뉴ID" v-model="value.menuIds" :editMode="editMode" @change="change"/>
+            <MenuId offline label="menuId" v-model="value.menuId" :editMode="editMode" @change="change"/>
         </v-card-text>
 
         <v-card-actions style="background-color: white;">
@@ -82,123 +82,125 @@
 </template>
 
 <script>
-    const axios = require('axios').default;
 
+import MenuId from './MenuId.vue';
+const axios = require('axios').default;
 
-    export default {
-        name: 'TableTableOrder',
-        components:{
+export default {
+    name: 'TableTableOrder',
+    components:{
+        MenuId
+    },
+    props: {
+        value: [Object, String, Number, Boolean, Array],
+        editMode: Boolean,
+        isNew: Boolean,
+        offline: Boolean,
+    },
+    data: () => ({
+        snackbar: {
+            status: false,
+            timeout: 5000,
+            text: '',
         },
-        props: {
-            value: [Object, String, Number, Boolean, Array],
-            editMode: Boolean,
-            isNew: Boolean,
-            offline: Boolean,
+    }),
+async created() {
+    },
+    methods: {
+        decode(value) {
+            return decodeURIComponent(value);
         },
-        data: () => ({
-            snackbar: {
-                status: false,
-                timeout: 5000,
-                text: '',
-            },
-        }),
-	async created() {
-        },
-        methods: {
-            decode(value) {
-                return decodeURIComponent(value);
-            },
-            selectFile(){
-                if(this.editMode == false) {
-                    return false;
-                }
-                var me = this
-                var input = document.createElement("input");
-                input.type = "file";
-                input.accept = "image/*";
-                input.id = "uploadInput";
-                
-                input.click();
-                input.onchange = function (event) {
-                    var file = event.target.files[0]
-                    var reader = new FileReader();
+        selectFile(){
+            if(this.editMode == false) {
+                return false;
+            }
+            var me = this
+            var input = document.createElement("input");
+            input.type = "file";
+            input.accept = "image/*";
+            input.id = "uploadInput";
+            
+            input.click();
+            input.onchange = function (event) {
+                var file = event.target.files[0]
+                var reader = new FileReader();
 
-                    reader.onload = function () {
-                        var result = reader.result;
-                        me.imageUrl = result;
-                        me.value.photo = result;
-                        
-                    };
-                    reader.readAsDataURL( file );
+                reader.onload = function () {
+                    var result = reader.result;
+                    me.imageUrl = result;
+                    me.value.photo = result;
+                    
                 };
-            },
-            edit() {
-                this.editMode = true;
-            },
-            async save(){
-                try {
-                    var temp = null;
-
-                    if(!this.offline) {
-                        if(this.isNew) {
-                            temp = await axios.post(axios.fixUrl('/tableOrders'), this.value)
-                        } else {
-                            temp = await axios.put(axios.fixUrl(this.value._links.self.href), this.value)
-                        }
-                    }
-
-                    if(this.value!=null) {
-                        for(var k in temp.data) this.value[k]=temp.data[k];
-                    } else {
-                        this.value = temp.data;
-                    }
-
-                    this.editMode = false;
-                    this.$emit('input', this.value);
-
-                    if (this.isNew) {
-                        this.$emit('add', this.value);
-                    } else {
-                        this.$emit('edit', this.value);
-                    }
-
-                    location.reload()
-
-                } catch(e) {
-                    this.snackbar.status = true
-                    if(e.response && e.response.data.message) {
-                        this.snackbar.text = e.response.data.message
-                    } else {
-                        this.snackbar.text = e
-                    }
-                }
-                
-            },
-            async remove(){
-                try {
-                    if (!this.offline) {
-                        await axios.delete(axios.fixUrl(this.value._links.self.href))
-                    }
-
-                    this.editMode = false;
-                    this.isDeleted = true;
-
-                    this.$emit('input', this.value);
-                    this.$emit('delete', this.value);
-
-                } catch(e) {
-                    this.snackbar.status = true
-                    if(e.response && e.response.data.message) {
-                        this.snackbar.text = e.response.data.message
-                    } else {
-                        this.snackbar.text = e
-                    }
-                }
-            },
-            change(){
-                this.$emit('input', this.value);
-            },
+                reader.readAsDataURL( file );
+            };
         },
-    }
+        edit() {
+            this.editMode = true;
+        },
+        async save(){
+            try {
+                var temp = null;
+
+                if(!this.offline) {
+                    if(this.isNew) {
+                        temp = await axios.post(axios.fixUrl('/tableOrders'), this.value)
+                    } else {
+                        temp = await axios.put(axios.fixUrl(this.value._links.self.href), this.value)
+                    }
+                }
+
+                if(this.value!=null) {
+                    for(var k in temp.data) this.value[k]=temp.data[k];
+                } else {
+                    this.value = temp.data;
+                }
+
+                this.editMode = false;
+                this.$emit('input', this.value);
+
+                if (this.isNew) {
+                    this.$emit('add', this.value);
+                } else {
+                    this.$emit('edit', this.value);
+                }
+
+                location.reload()
+
+            } catch(e) {
+                this.snackbar.status = true
+                if(e.response && e.response.data.message) {
+                    this.snackbar.text = e.response.data.message
+                } else {
+                    this.snackbar.text = e
+                }
+            }
+            
+        },
+        async remove(){
+            try {
+                if (!this.offline) {
+                    await axios.delete(axios.fixUrl(this.value._links.self.href))
+                }
+
+                this.editMode = false;
+                this.isDeleted = true;
+
+                this.$emit('input', this.value);
+                this.$emit('delete', this.value);
+
+            } catch(e) {
+                this.snackbar.status = true
+                if(e.response && e.response.data.message) {
+                    this.snackbar.text = e.response.data.message
+                } else {
+                    this.snackbar.text = e
+                }
+            }
+        },
+        change(){
+            this.$emit('input', this.value);
+        },
+    },
+}
 </script>
 

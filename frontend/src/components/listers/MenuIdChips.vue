@@ -4,7 +4,7 @@
             <v-list-group v-model="isExpansion">
                 <template v-slot:activator>
                     <v-list-item-content>
-                        <v-list-item-title>MenuIds</v-list-item-title>
+                        <v-list-item-title>MenuId</v-list-item-title>
                     </v-list-item-content>
                 </template>
             
@@ -24,7 +24,7 @@
             </v-list-group>
         </v-list>
 
-        <MenuIds v-if="editMode && tick" offline :isNew="true" :inList="true"
+        <MenuId v-if="editMode && tick" offline :isNew="true" :inList="true"
                 :editMode="editMode" v-model="newValue" @add="append">
             <template slot="actions">
                 <v-spacer></v-spacer>
@@ -54,17 +54,17 @@
                     Delete
                 </v-btn>
             </template>
-        </MenuIds>
+        </MenuId>
     </div>
 </template>
 
 <script>
-    import MenuIds from '../MenuIds.vue';
+    import MenuId from '../MenuId.vue';
 
     export default {
-        name: 'MenuIdsManager',
+        name: 'MenuIdManager',
         components: {
-            MenuIds
+            MenuId
         },
         props: {
             value: [Object, String, Number, Boolean, Array],
