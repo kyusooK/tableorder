@@ -49,7 +49,7 @@ public class TableOrder  {
     private Date orderDate;
     
     @ElementCollection
-    private List<MenuId> menuIds;
+    private List<MenuId> menuId;
 
     public static TableOrderRepository repository(){
         TableOrderRepository tableOrderRepository = TableApplication.applicationContext.getBean(TableOrderRepository.class);
@@ -98,7 +98,7 @@ public class TableOrder  {
         Long menuTotalPrice = 0L;
         String order = "";
 
-        for (MenuId menuId : new ArrayList<>(menuIds)) {
+        for (MenuId menuId : new ArrayList<>(menuId)) {
             // MenuId에서 ID를 추출하여 URL 구성
             Long id = menuId.getId(); // MenuId에서 Long 타입의 ID 추출
             String url = "http://localhost:8082/menus/" + id; // Menu API URL
