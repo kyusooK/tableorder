@@ -22,10 +22,13 @@
 
 <script>
     const axios = require('axios').default;
+    import TableOrderPicker from './listers/TableOrderPicker.vue';
 
     export default {
         name: 'TableOrderId',
-        components:{},
+        components:{
+            TableOrderPicker
+        },
         props: {
             value: [Object, String, Number, Boolean, Array],
             editMode: Boolean,
