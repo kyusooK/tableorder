@@ -103,6 +103,7 @@ export default {
             timeout: 5000,
             text: '',
         },
+        menuId: [],
     }),
 async created() {
     },

@@ -1,14 +1,34 @@
 <template>
-    <v-card outlined @click="openDialog">
-        <v-card-title>
-            Menu : {{ referenceValue ? referenceValue._links.self.href.split('/').pop() : '' }}
-        </v-card-title>
+    <v-card outlined>
+        <v-list dense v-if="value && value.length > 0">
+            <v-list-item v-for="(menu, index) in referenceValues" :key="index">
+                <v-list-item-content>
+                    <v-list-item-title>
+                        {{ menu.menuName }} - {{ menu.price }}원
+                    </v-list-item-title>
+                    <v-list-item-subtitle>
+                        {{ menu.menuInfo }}
+                    </v-list-item-subtitle>
+                </v-list-item-content>
+                <v-list-item-action v-if="editMode">
+                    <v-btn icon @click="removeMenu(index)">
+                        <v-icon>mdi-delete</v-icon>
+                    </v-btn>
+                </v-list-item-action>
+            </v-list-item>
+        </v-list>
+
+        <v-card-actions v-if="editMode">
+            <v-btn color="primary" text @click="openDialog">
+                메뉴 추가
+            </v-btn>
+        </v-card-actions>
 
         <v-dialog v-model="pickerDialog" width="500">
             <v-card>
-                <v-card-title>Menu</v-card-title>
+                <v-card-title>메뉴 선택</v-card-title>
                 <v-card-text>
-                    <MenuPicker v-model="value" @selected="pick"/>
+                    <MenuPicker v-model="tempValue" @selected="pick"/>
                 </v-card-text>
                 <v-card-actions>
                     <v-spacer></v-spacer>
@@ -17,101 +37,82 @@
             </v-card>
         </v-dialog>
     </v-card>
-
 </template>
 
 <script>
-    const axios = require('axios').default;
+const axios = require('axios').default;
+import MenuPicker from './listers/MenuPicker';
 
-    import MenuPicker from './listers/MenuPicker'; 
-
-    export default {
-        name: 'MenuId',
-        components:{
-            MenuPicker
-        },
-        props: {
-            value: [Object, String, Number, Boolean, Array],
-            editMode: Boolean,
-            isNew: Boolean,
-            offline: Boolean,
-            inList: Boolean,
-            label: String,
-        },
-        data: () => ({
-            newValue: {},
-            pickerDialog: false,
-            referenceValue: null,
-        }),
-        async created() {
-            if(!Object.values(this.value)[0]) {
-                this.$emit('input', {});
-                this.newValue = {
-                    'id': '',
-                }
-            }
-            else {
-                this.newValue = this.value;
-                var path = '/menus';
-                var temp = await axios.get(axios.fixUrl(path + '/' +  Object.values(this.value)[0]));
-                if(temp.data) {
-                    this.referenceValue = temp.data
-                }
+export default {
+    name: 'MenuId',
+    components: {
+        MenuPicker
+    },
+    props: {
+        value: [Object, String, Number, Boolean, Array],
+        editMode: Boolean,
+        isNew: Boolean,
+        offline: Boolean,
+        label: String,
+    },
+    data: () => ({
+        tempValue: null,
+        pickerDialog: false,
+        referenceValues: [],
+    }),
+    async created() {
+        if (!Array.isArray(this.value)) {
+            this.$emit('input', []);
+        }
+        await this.updateReferenceValues();
+    },
+    methods: {
+        openDialog() {
+            if (this.editMode) {
+                this.pickerDialog = true;
             }
         },
-        watch: {
-            value(val) {
-                this.$emit('input', val);
-            },
-            newValue(val) {
-                this.$emit('input', val);
-            },
+        async updateReferenceValues() {
+            if (this.value && this.value.length > 0) {
+                this.referenceValues = await Promise.all(
+                    this.value.map(async (menuId) => {
+                        try {
+                            const response = await axios.get(axios.fixUrl('/menus/' + menuId.id));
+                            return response.data;
+                        } catch (error) {
+                            console.error('Error fetching menu:', error);
+                            return null;
+                        }
+                    })
+                );
+                // Remove any null values from failed requests
+                this.referenceValues = this.referenceValues.filter(v => v !== null);
+            }
         },
-
-        methods: {
-            edit() {
-                this.editMode = true;
-            },
-            async add() {
-                this.editMode = false;
+        async pick(val) {
+            if (!Array.isArray(this.value)) {
+                this.value = [];
+            }
+            
+            const menuIdObj = { id: val.id };
+            
+            if (!this.value.some(item => item.id === val.id)) {
+                this.value = [...this.value, menuIdObj];
+                await this.updateReferenceValues();
                 this.$emit('input', this.value);
-
-                if(this.isNew){
-                    this.$emit('add', this.value);
-                } else {
-                    this.$emit('edit', this.value);
-                }
-            },
-            async remove(){
-                this.editMode = false;
-                this.isDeleted = true;
-
-                this.$emit('input', this.value);
-                this.$emit('delete', this.value);
-            },
-            change(){
                 this.$emit('change', this.value);
-            },
-            openDialog() {
-                var path = '/menus/';
-
-                if(this.editMode) {
-                    this.pickerDialog = true;
-                } else {
-                    this.pickerDialog = false;
-                    this.$router.push(path + this.value.menuId);
-                }
-            },
-            async pick(val){
-                this.newValue = val;
-                var path = '/menus';
-                var temp = await axios.get(axios.fixUrl(path + '/' + val.menuId));
-                if(temp.data) {
-                    this.referenceValue = temp.data;
-                }
-                this.referenceValue.nameField = val.nameField;
-            },
+            }
+            this.pickerDialog = false;
+        },
+        removeMenu(index) {
+            this.value.splice(index, 1);
+            this.referenceValues.splice(index, 1);
+            this.$emit('input', this.value);
+            this.$emit('change', this.value);
+        },
+        change() {
+            this.$emit('change', this.value);
         }
     }
+}
 </script>
-
