@@ -38,40 +38,10 @@ public class Sales {
 
     //<<< Clean Arch / Port Method
     public static void registerSalesData(OrderPlaced orderPlaced) {
-        //implement business logic here:
 
-        /** Example 1:  new item 
-        Sales sales = new Sales();
-        repository().save(sales);
-
-        SalesDataRegistered salesDataRegistered = new SalesDataRegistered(sales);
-        salesDataRegistered.publishAfterCommit();
-        SalesDataUpdated salesDataUpdated = new SalesDataUpdated(sales);
-        salesDataUpdated.publishAfterCommit();
-        */
-
-        /** Example 2:  finding and process
-        
-        // if orderPlaced.menuId exists, use it
-        
-        // ObjectMapper mapper = new ObjectMapper();
-        // Map<Long, Object> tableOrderMap = mapper.convertValue(orderPlaced.getMenuId(), Map.class);
-
-        repository().findById(orderPlaced.get???()).ifPresent(sales->{
-            
-            sales // do something
-            repository().save(sales);
-
-            SalesDataRegistered salesDataRegistered = new SalesDataRegistered(sales);
-            salesDataRegistered.publishAfterCommit();
-            SalesDataUpdated salesDataUpdated = new SalesDataUpdated(sales);
-            salesDataUpdated.publishAfterCommit();
-
-         });
-        */
         //아이디 토대로 조회하였을 때 나온 MenuName과 등록된 값중 menu와 일치하는지 확인. 
 
-        // 이후, 등록된 내용이 있을 경우 날짜를 조회하여 날짜가 일치하는지 확인 (다를경우 새로 등록 같은 경우 이전 정보 업데이트)
+        // 이후, 등록된 내용이 있을 경우 날짜를 조회하여 날짜가 일치하는지 확인 (다를경우 새로 등록, 같은 경우 이전 정보 업데이트)
 
         // Sales sales = new Sales();
 

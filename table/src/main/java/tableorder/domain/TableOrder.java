@@ -58,71 +58,42 @@ public class TableOrder  {
 //<<< Clean Arch / Port Method
     @PostPersist
     public void onPostPersist() {
-        // List<Long> menuIds = this.menuIds.stream().map(MenuId::getId).collect(Collectors.toList());
-
-        // // 메뉴를 가져오는 부분에서 JSON 형식 확인
-        // String jsonResponse = TableApplication.applicationContext
-        //     .getBean(MenuService.class)
-        //     .getMenus(menuIds); // JSON 응답을 String으로 받음
-
-        // ObjectMapper objectMapper = new ObjectMapper();
-        // List<Menu> menus;
-
-        // try {
-        //     // JSON 문자열을 List<Menu>로 변환
-        //     JsonNode jsonNode = objectMapper.readTree(jsonResponse);
-        //     menus = objectMapper.convertValue(jsonNode.get("menus"), objectMapper.getTypeFactory().constructCollectionType(List.class, Menu.class));
-        // } catch (JsonProcessingException e) {
-        //     throw new RuntimeException("메뉴 정보를 가져오는 중 오류가 발생했습니다.", e);
-        // }
-
-        // if (menus != null && !menus.isEmpty()) {
-        //     Long totalPrice = menus.stream()
-        //         .map(menu -> menu.getPrice() * menu.getStock())
-        //         .reduce(0L, Long::sum);
-            
-        //     LocalDateTime todayDate = LocalDateTime.now();
-        //     this.setTotalPrice(totalPrice);
-        //     this.setOrderDate(Date.from(todayDate.atZone(ZoneId.systemDefault()).toInstant()));
-    
-        //     OrderPlaced orderPlaced = new OrderPlaced(this);
-        //     orderPlaced.publishAfterCommit();
-        // }
-
-        // if (menus == null || menus.isEmpty()) {
-        //     System.out.println("메뉴 리스트가 비어 있습니다. 요청한 menuIds: " + menuIds);
-        //     throw new RuntimeException("주문할 수 있는 메뉴가 없습니다.");
-        // }
-
         RestTemplate restTemplate = new RestTemplate();
         Long menuTotalPrice = 0L;
-        String order = "";
+        StringBuilder orderBuilder = new StringBuilder("주문메뉴: ");
+        ArrayList<MenuId> menuList = new ArrayList<>(menuId);
 
-        for (MenuId menuId : new ArrayList<>(menuId)) {
-            // MenuId에서 ID를 추출하여 URL 구성
-            Long id = menuId.getId(); // MenuId에서 Long 타입의 ID 추출
-            String url = "http://localhost:8082/menus/" + id; // Menu API URL
-    
+        for (int i = 0; i < menuList.size(); i++) {
+            MenuId menuId = menuList.get(i);
+            Long id = menuId.getId();
+            String url = "http://localhost:8082/menus/" + id;
+
             try {
-                Menu menu = restTemplate.getForObject(url, Menu.class); // Menu 조회
-    
-                if (menu == null) {
-                    throw new RuntimeException("메뉴가 존재하지 않습니다: " + id); // 메뉴가 없을 경우 예외 발생
-                }
-    
-                menuTotalPrice += menu.getPrice();
-                order += "주문 메뉴: " + menu.getMenuName() + " / ";
+                Menu menu = restTemplate.getForObject(url, Menu.class);
 
-                // 주문일자를 오늘로 변환하여 저장
+                if (menu == null) {
+                    throw new RuntimeException("메뉴가 존재하지 않습니다: " + id);
+                }
+
+                menuTotalPrice += menu.getPrice();
+                
+                // 메뉴 이름 추가
+                orderBuilder.append(menu.getMenuName());
+                
+                // 마지막 메뉴가 아닌 경우에만 쉼표와 공백 추가
+                if (i < menuList.size() - 1) {
+                    orderBuilder.append(", ");
+                }
+
             } catch (HttpClientErrorException e) {
-                throw new RuntimeException("메뉴를 조회하는 중 오류 발생: " + e.getMessage()); // HTTP 오류 처리
+                throw new RuntimeException("메뉴를 조회하는 중 오류 발생: " + e.getMessage());
             }
         }
 
         this.setOrderDate(new Date());
         this.setTotalPrice(menuTotalPrice);
         this.setOrderStatus(orderStatus);
-        this.setOrderInfo(order);
+        this.setOrderInfo(orderBuilder.toString());
 
         repository().save(this);
 
