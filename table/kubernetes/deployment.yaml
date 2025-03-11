@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: table
-          image: "username/table:latest"
+          image: "user11registry.azurecr.io/table:0101"
           ports:
             - containerPort: 8080
           readinessProbe:
