@@ -11,4 +11,6 @@ import tableorder.domain.*;
 //<<< PoEAA / Repository
 @RepositoryRestResource(collectionResourceRel = "sales", path = "sales")
 public interface SalesRepository
-    extends PagingAndSortingRepository<Sales, Long> {}
+    extends PagingAndSortingRepository<Sales, Long> {
+        Sales findByMenu(String menu);
+    }
